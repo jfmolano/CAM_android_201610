@@ -22,6 +22,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class MainActivity extends Activity {
@@ -34,6 +36,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ruido = 0;
+        lugar = 99;
         new TareaAudio().execute();
         populateSuferenciasDia();
         populateListView();
@@ -64,12 +67,16 @@ public class MainActivity extends Activity {
 
                 JSONObject objetoJSON = new JSONObject();
                 System.out.println("Objeto a mandar:");
-
-                objetoJSON.put("dia", "8");
-                objetoJSON.put("hora", "13");
+                Calendar c = Calendar.getInstance();
+                int day_of_week = c.get(Calendar.DAY_OF_WEEK);
+                System.out.println("int day_of_week = c.get(Calendar.DAY_OF_WEEK): - - - : " + day_of_week);
+                objetoJSON.put("dia",""+day_of_week);
+                int hora = c.get(Calendar.HOUR_OF_DAY);
+                System.out.println("int hora = c.get(Calendar.HOUR_OF_DAY): - - - : " + hora);
+                objetoJSON.put("hora",""+hora);
                 int ruidoInt = (int)ruido;
                 objetoJSON.put("ruido", ""+ruidoInt);
-                objetoJSON.put("lugar", "3");
+                objetoJSON.put("lugar", ""+lugar);
 
                 System.out.println(objetoJSON);
 
