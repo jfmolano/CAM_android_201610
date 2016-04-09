@@ -42,6 +42,7 @@ public class MainActivity extends Activity {
         new TareaAudio().execute();
         new Solicitar().execute();
         mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
+        //mydatabase.execSQL("DROP TABLE Registros;");
         mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Registros(Hora INT,Dia INT,Lugar INT,Ruido INT);");
         /* PRUEBA SQLITE
         SQLiteDatabase mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
@@ -64,18 +65,14 @@ public class MainActivity extends Activity {
             }while(resultSet.moveToNext());
         }
         resultSet.close();*/
-        Cursor resultSet = mydatabase.rawQuery("Select * from Registros", null);
+        Cursor resultSet = mydatabase.rawQuery("Select Ruido, count(*) as cuenta from Registros where Hora = 17 group by ruido order by cuenta DESC;", null);
         resultSet.moveToFirst();
         if (resultSet.moveToFirst()){
             do{
-                String hora = resultSet.getString(0);
-                System.out.println("hora SQL: "+ hora);
-                String dia = resultSet.getString(1);
-                System.out.println("dia SQL: "+ dia);
-                String lugar = resultSet.getString(2);
-                System.out.println("lugar SQL: "+ lugar);
-                String ruido = resultSet.getString(3);
-                System.out.println("ruido SQL: "+ ruido);
+                String ruido = resultSet.getString(0);
+                System.out.println("Ruido SQL: "+ ruido);
+                String cuenta = resultSet.getString(1);
+                System.out.println("cuenta SQL: "+ cuenta);
                 // do what ever you want here
             }while(resultSet.moveToNext());
         }
@@ -119,7 +116,7 @@ public class MainActivity extends Activity {
                 int ruidoInt = (int)ruido;
                 objetoJSON.put("ruido", ""+ruidoInt);
                 objetoJSON.put("lugar", ""+lugar);
-
+                System.out.println("JSON de ruido a mandar");
                 System.out.println(objetoJSON);
 
                 OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
@@ -245,7 +242,7 @@ public class MainActivity extends Activity {
             Calendar c = Calendar.getInstance();
             int day = c.get(Calendar.DAY_OF_WEEK);
             int hora = c.get(Calendar.HOUR_OF_DAY);
-            mydatabase.execSQL("INSERT INTO Registros VALUES("+ hora +","+ day +","+ lugar +"," + (int)ruido + ");");
+            mydatabase.execSQL("INSERT INTO Registros VALUES("+ hora +","+ day +","+ lugar +"," + ((int)ruido/10)*10 + ");");
             new EnviarEstado().execute();
             return 0L;
         }
@@ -305,10 +302,6 @@ public class MainActivity extends Activity {
         {
             return -1;
         }
-    }
-
-    public void enviarRegistro() {
-
     }
 
     @Override
