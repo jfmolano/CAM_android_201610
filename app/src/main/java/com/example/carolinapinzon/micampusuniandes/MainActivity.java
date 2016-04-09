@@ -15,12 +15,19 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.content.Intent;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 
 public class MainActivity extends Activity {
     private MediaRecorder mRecorder = null;
     private double ruido;
+    private int lugar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +47,79 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    //JSON ejemplo: {"dia":"6","hora":"12","ruido":"78","lugar":"3"}
+
+    private class TareaRed extends AsyncTask<URL, Integer, Long> {
+        protected Long doInBackground(URL... urls) {
+            try {
+                String url = "http://157.253.205.30/api/registroAdd";
+                URL object = new URL(url);
+
+                HttpURLConnection con = (HttpURLConnection) object.openConnection();
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setRequestProperty("Content-Type", "application/json");
+                con.setRequestProperty("Accept", "application/json");
+                con.setRequestMethod("POST");
+
+                JSONObject objetoJSON = new JSONObject();
+                System.out.println("Objeto a mandar:");
+
+                objetoJSON.put("dia", "8");
+                objetoJSON.put("hora", "13");
+                int ruidoInt = (int)ruido;
+                objetoJSON.put("ruido", ""+ruidoInt);
+                objetoJSON.put("lugar", "3");
+
+                System.out.println(objetoJSON);
+
+                OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
+                wr.write(objetoJSON.toString());
+                wr.flush();
+
+//display what returns the POST request
+
+                StringBuilder sb = new StringBuilder();
+                int HttpResult = con.getResponseCode();
+                System.out.println("Respuesta:");
+                System.out.println(HttpResult);
+                System.out.println("Respuesta esperada:");
+                System.out.println(HttpURLConnection.HTTP_OK);
+                if (HttpResult == HttpURLConnection.HTTP_CREATED) {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+
+                    br.close();
+
+                    System.out.println("- - - - - - - - - - - - - - - - - -");
+                    System.out.println("" + sb.toString());
+                    System.out.println("- - - - - - - - - - - - - - - - - -");
+
+                } else {
+                    System.out.println(con.getResponseMessage());
+                }
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.fillInStackTrace());
+            }
+            return 0L;
+        }
+
+        protected void onPostExecute(Long result) {
+            System.out.println("Downloaded " + result + " bytes");
+        }
+    }
+
     private class TareaAudio extends AsyncTask<URL, Integer, Long> {
         protected Long doInBackground(URL... urls) {
             System.out.println("Inicia grabacion");
             start();
             stop();
+            new TareaRed().execute();
             return 0L;
         }
 
