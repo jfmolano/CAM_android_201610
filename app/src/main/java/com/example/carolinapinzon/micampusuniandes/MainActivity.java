@@ -1,6 +1,8 @@
 package com.example.carolinapinzon.micampusuniandes;
 
 import android.app.Activity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,7 +25,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Calendar;
-import java.util.Date;
 
 
 public class MainActivity extends Activity {
@@ -36,8 +37,29 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ruido = 0;
-        lugar = 99;
+        lugar = 98;
         new TareaAudio().execute();
+        new Solicitar().execute();
+        SQLiteDatabase mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
+        //mydatabase.execSQL("DROP TABLE Registros;");
+        mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Registros(Hora INT,Dia INT,Lugar INT,Ruido INT);");
+        mydatabase.execSQL("INSERT INTO Registros VALUES(15,7,99,"+(int)(Math.random()*80)+");");
+        Cursor resultSet = mydatabase.rawQuery("Select * from Registros", null);
+        resultSet.moveToFirst();
+        if (resultSet.moveToFirst()){
+            do{
+                String hora = resultSet.getString(0);
+                System.out.println("hora SQL: "+ hora);
+                String dia = resultSet.getString(1);
+                System.out.println("dia SQL: "+ dia);
+                String lugar = resultSet.getString(2);
+                System.out.println("lugar SQL: "+ lugar);
+                String ruido = resultSet.getString(3);
+                System.out.println("ruido SQL: "+ ruido);
+                // do what ever you want here
+            }while(resultSet.moveToNext());
+        }
+        resultSet.close();
         populateSuferenciasDia();
         populateListView();
         registerClickCallback();
@@ -52,7 +74,7 @@ public class MainActivity extends Activity {
 
     //JSON ejemplo: {"dia":"6","hora":"12","ruido":"78","lugar":"3"}
 
-    private class TareaRed extends AsyncTask<URL, Integer, Long> {
+    private class EnviarEstado extends AsyncTask<URL, Integer, Long> {
         protected Long doInBackground(URL... urls) {
             try {
                 String url = "http://157.253.205.30/api/registroAdd";
@@ -121,12 +143,86 @@ public class MainActivity extends Activity {
         }
     }
 
+    private class Solicitar extends AsyncTask<URL, Integer, Long> {
+        protected Long doInBackground(URL... urls) {
+            llamarHTTP(7,15,70);
+            llamarHTTP(7,16,60);
+            llamarHTTP(7,17,60);
+            return 0L;
+        }
+
+        private void llamarHTTP(int diaP, int horaP, int ruidoP)
+        {
+
+            try {
+                String url = "http://157.253.205.30/api/darSugerencia";
+                URL object = new URL(url);
+
+                HttpURLConnection con = (HttpURLConnection) object.openConnection();
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setRequestProperty("Content-Type", "application/json");
+                con.setRequestProperty("Accept", "application/json");
+                con.setRequestMethod("POST");
+
+                JSONObject objetoJSON = new JSONObject();
+                Calendar c = Calendar.getInstance();
+                int day = c.get(Calendar.DAY_OF_WEEK);
+                objetoJSON.put("dia",""+diaP);
+                int hora = c.get(Calendar.HOUR_OF_DAY);
+                objetoJSON.put("hora",""+horaP);
+                int ruidoInt = (int)ruido;
+                objetoJSON.put("ruido", ""+ruidoP);
+                //objetoJSON.put("lugar", ""+lugar);
+
+                System.out.println(objetoJSON);
+
+                OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
+                wr.write(objetoJSON.toString());
+                wr.flush();
+
+//display what returns the POST request
+
+                StringBuilder sb = new StringBuilder();
+                int HttpResult = con.getResponseCode();
+                System.out.println("Respuesta:");
+                System.out.println(HttpResult);
+                System.out.println("Respuesta esperada:");
+                System.out.println(HttpURLConnection.HTTP_OK);
+                if (HttpResult == HttpURLConnection.HTTP_CREATED) {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+
+                    br.close();
+
+                    System.out.println("- - - - - - Respuesta del servidor - - - - - -");
+                    System.out.println("" + sb.toString());
+                    System.out.println("- - - - - - Respuesta del servidor - - - - - -");
+
+                } else {
+                    System.out.println(con.getResponseMessage());
+                }
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.fillInStackTrace());
+            }
+        }
+
+        protected void onPostExecute(Long result) {
+            System.out.println("Downloaded " + result + " bytes");
+        }
+    }
+
     private class TareaAudio extends AsyncTask<URL, Integer, Long> {
         protected Long doInBackground(URL... urls) {
             System.out.println("Inicia grabacion");
             start();
             stop();
-            new TareaRed().execute();
+            new EnviarEstado().execute();
             return 0L;
         }
 
