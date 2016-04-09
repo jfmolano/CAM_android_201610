@@ -1,0 +1,187 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    tools:context="com.example.carolinapinzon.micampusuniandes.OtrasRecomendaciones"
+    android:id="@+id/otrasRecomedaciones">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgOpcion1"
+        android:src="@drawable/ml"
+        android:maxHeight="90dp"
+        android:maxWidth="90dp"
+        android:minHeight="90dp"
+        android:minWidth="90dp"
+        android:adjustViewBounds="true"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Primera opción"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="0dp"
+        android:paddingBottom="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Segunda opción"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/imgOpcion1"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="0dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="5dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgOpcion2"
+        android:src="@drawable/ml"
+        android:maxHeight="90dp"
+        android:maxWidth="90dp"
+        android:minHeight="90dp"
+        android:minWidth="90dp"
+        android:adjustViewBounds="true"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Tercera opción"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/imgOpcion2"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="0dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="5dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgOpcion3"
+        android:src="@drawable/ml"
+        android:maxHeight="90dp"
+        android:maxWidth="90dp"
+        android:minHeight="90dp"
+        android:minWidth="90dp"
+        android:adjustViewBounds="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Sugerencia:"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/textView2"
+        android:layout_toEndOf="@+id/imgOpcion1"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="ML"
+        android:id="@+id/txtOpcion1"
+        android:layout_below="@+id/textView5"
+        android:layout_toEndOf="@+id/imgOpcion1"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Sonido: 50dBA - Medio"
+        android:id="@+id/txtSonido1"
+        android:paddingTop="5dp"
+        android:layout_below="@+id/txtOpcion1"
+        android:layout_toEndOf="@+id/imgOpcion1"
+        android:paddingLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Sugerencia:"
+        android:id="@+id/textView8"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/textView3"
+        android:layout_toEndOf="@+id/imgOpcion2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="ML"
+        android:id="@+id/txtOpcion2"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:layout_below="@+id/textView8"
+        android:layout_toEndOf="@+id/imgOpcion2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Sonido: 50dBA - Medio"
+        android:id="@+id/txtSonido2"
+        android:paddingTop="5dp"
+        android:paddingLeft="10dp"
+        android:layout_below="@+id/txtOpcion2"
+        android:layout_toEndOf="@+id/imgOpcion2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Sugerencia:"
+        android:id="@+id/textView11"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/textView4"
+        android:layout_toEndOf="@+id/imgOpcion3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="ML"
+        android:id="@+id/txtOpcion3"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:layout_below="@+id/textView11"
+        android:layout_toEndOf="@+id/imgOpcion3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Sonido: 50dBA - Medio"
+        android:id="@+id/txtSonido3"
+        android:paddingTop="5dp"
+        android:paddingLeft="10dp"
+        android:layout_below="@+id/txtOpcion3"
+        android:layout_toEndOf="@+id/imgOpcion3" />
+
+</RelativeLayout>

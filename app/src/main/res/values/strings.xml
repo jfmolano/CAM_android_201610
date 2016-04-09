@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MiCampusUniandes</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_otras_recomendaciones">Otras Recomendaciones</string>
+</resources>

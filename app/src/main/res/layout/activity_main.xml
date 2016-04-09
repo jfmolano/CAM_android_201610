@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp" tools:context=".MainActivity"
+    android:id="@+id/sugerenciasView">
+
+    <TextView android:text="Sugerencias" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sugerenciasLabel"
+        android:textSize="20dp"
+        android:paddingLeft="10dp" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sugerenciasListView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:choiceMode="singleChoice"
+        android:layout_below="@+id/sugerenciasLabel"
+        android:layout_alignParentEnd="true">
+    </ListView>
+
+</RelativeLayout>
