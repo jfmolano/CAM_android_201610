@@ -1,12 +1,8 @@
 package com.example.carolinapinzon.micampusuniandes;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.media.MediaRecorder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,15 +13,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.content.Intent;
-import android.util.Log;
+
+import java.net.URL;
+
 
 public class MainActivity extends Activity {
+    private MediaRecorder mRecorder = null;
+    private double ruido;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ruido = 0;
+        new TareaAudio().execute();
         populateSuferenciasDia();
         populateListView();
         registerClickCallback();
@@ -36,6 +38,75 @@ public class MainActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    private class TareaAudio extends AsyncTask<URL, Integer, Long> {
+        protected Long doInBackground(URL... urls) {
+            System.out.println("Inicia grabacion");
+            start();
+            stop();
+            return 0L;
+        }
+
+        protected void onPostExecute(Long result) {
+            System.out.println("Ruido " + ruido + " dB");
+        }
+    }
+
+    public void start() {
+        try{
+            if (mRecorder == null) {
+                mRecorder = new MediaRecorder();
+                mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+                mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                mRecorder.setOutputFile("/dev/null");
+                mRecorder.prepare();
+                mRecorder.start();
+                ruido = 7.363 * Math.log(darRuido()) + 4.69;
+            }
+        }catch(Exception e){}
+
+    }
+
+    public void stop() {
+        if (mRecorder != null) {
+            mRecorder.stop();
+            mRecorder.release();
+            mRecorder = null;
+        }
+    }
+
+    public double getAmplitude() {
+        if (mRecorder != null)
+            return  mRecorder.getMaxAmplitude();
+        else
+            return 0;
+
+    }
+
+    public double darRuido()
+    {
+        try {
+            double ruido = 0;
+            double ampMax;
+            ampMax = getAmplitude();
+            for (int i = 0; i < 4; i++) {
+                System.out.println("Grabando...");
+                Thread.sleep(1000);
+                ampMax = getAmplitude();
+                ruido = (ruido*i+ampMax)/(i+1);
+            }
+            return ruido;
+        }
+        catch(Exception e)
+        {
+            return -1;
+        }
+    }
+
+    public void enviarRegistro() {
+
     }
 
     @Override
