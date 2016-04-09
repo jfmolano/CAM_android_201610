@@ -40,10 +40,14 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.29936305">
-              <caret line="43" column="54" selection-start-line="43" selection-start-column="54" selection-end-line="43" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.3789809">
+              <caret line="244" column="48" selection-start-line="244" selection-start-column="48" selection-end-line="244" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#10126#10127#0" expanded="true" />
+                <element signature="e#10194#10195#0" expanded="true" />
+                <element signature="e#12949#13380#0" expanded="true" />
+                <element signature="e#13379#13380#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1925,6 +1929,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#10126#10127#0" expanded="true" />
+            <element signature="e#10194#10195#0" expanded="true" />
+            <element signature="e#12949#13380#0" expanded="true" />
+            <element signature="e#13379#13380#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1996,6 +2004,10 @@
           <caret line="38" column="18" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#10126#10127#0" expanded="true" />
+            <element signature="e#10194#10195#0" expanded="true" />
+            <element signature="e#12949#13380#0" expanded="true" />
+            <element signature="e#13379#13380#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2124,10 +2136,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.29936305">
-          <caret line="43" column="54" selection-start-line="43" selection-start-column="54" selection-end-line="43" selection-end-column="54" />
+        <state vertical-scroll-proportion="0.3789809">
+          <caret line="244" column="48" selection-start-line="244" selection-start-column="48" selection-end-line="244" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#10126#10127#0" expanded="true" />
+            <element signature="e#10194#10195#0" expanded="true" />
+            <element signature="e#12949#13380#0" expanded="true" />
+            <element signature="e#13379#13380#0" expanded="true" />
           </folding>
         </state>
       </provider>

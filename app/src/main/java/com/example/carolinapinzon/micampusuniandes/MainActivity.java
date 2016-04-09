@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
     private MediaRecorder mRecorder = null;
     private double ruido;
     private int lugar;
+    private SQLiteDatabase mydatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +41,29 @@ public class MainActivity extends Activity {
         lugar = 98;
         new TareaAudio().execute();
         new Solicitar().execute();
+        mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
+        mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Registros(Hora INT,Dia INT,Lugar INT,Ruido INT);");
+        /* PRUEBA SQLITE
         SQLiteDatabase mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
         //mydatabase.execSQL("DROP TABLE Registros;");
         mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Registros(Hora INT,Dia INT,Lugar INT,Ruido INT);");
         mydatabase.execSQL("INSERT INTO Registros VALUES(15,7,99,"+(int)(Math.random()*80)+");");
+        Cursor resultSet = mydatabase.rawQuery("Select * from Registros", null);
+        resultSet.moveToFirst();
+        if (resultSet.moveToFirst()){
+            do{
+                String hora = resultSet.getString(0);
+                System.out.println("hora SQL: "+ hora);
+                String dia = resultSet.getString(1);
+                System.out.println("dia SQL: "+ dia);
+                String lugar = resultSet.getString(2);
+                System.out.println("lugar SQL: "+ lugar);
+                String ruido = resultSet.getString(3);
+                System.out.println("ruido SQL: "+ ruido);
+                // do what ever you want here
+            }while(resultSet.moveToNext());
+        }
+        resultSet.close();*/
         Cursor resultSet = mydatabase.rawQuery("Select * from Registros", null);
         resultSet.moveToFirst();
         if (resultSet.moveToFirst()){
@@ -222,6 +242,10 @@ public class MainActivity extends Activity {
             System.out.println("Inicia grabacion");
             start();
             stop();
+            Calendar c = Calendar.getInstance();
+            int day = c.get(Calendar.DAY_OF_WEEK);
+            int hora = c.get(Calendar.HOUR_OF_DAY);
+            mydatabase.execSQL("INSERT INTO Registros VALUES("+ hora +","+ day +","+ lugar +"," + (int)ruido + ");");
             new EnviarEstado().execute();
             return 0L;
         }
