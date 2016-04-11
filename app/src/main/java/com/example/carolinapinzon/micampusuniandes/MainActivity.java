@@ -1,8 +1,11 @@
 package com.example.carolinapinzon.micampusuniandes;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,7 +19,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.content.Intent;
+import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -32,18 +37,49 @@ public class MainActivity extends Activity {
     private double ruido;
     private int lugar;
     private SQLiteDatabase mydatabase;
+    private boolean listaInterfaz;
+    int preferenciaAct;
+    int preferencia1hora;
+    int preferencia2hora;
+    Registro[] act;
+    Registro[] f1;
+    Registro[] f2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ruido = 0;
-        lugar = 98;
+        lugar = 97;
         new TareaAudio().execute();
-        new Solicitar().execute();
         mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
         //mydatabase.execSQL("DROP TABLE Registros;");
         mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Registros(Hora INT,Dia INT,Lugar INT,Ruido INT);");
+        /*
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 0 +","+ 1 +","+ 1 +"," + 50 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES(" + 1 + "," + 1 + "," + 2 + "," + 50 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES(" + 2 + "," + 1 + "," + 3 + "," + 50 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES(" + 3 + "," + 1 + "," + 3 + "," + 50 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 4 +","+ 1 +","+ 2 +"," + 50 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 5 +","+ 1 +","+ 1 +"," + 50 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES(" + 6 + "," + 1 + "," + 1 + "," + 60 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES(" + 7 + "," + 1 + "," + 2 + "," + 60 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 8 +","+ 1 +","+ 3 +"," + 60 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 9 +","+ 1 +","+ 3 +"," + 60 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 10 +","+ 1 +","+ 2 +"," + 70 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 11 +","+ 1 +","+ 1 +"," + 70 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 12 +","+ 1 +","+ 1 +"," + 70 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 13 +","+ 1 +","+ 2 +"," + 70 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 14 +","+ 1 +","+ 3 +"," + 80 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 15 +","+ 1 +","+ 3 +"," + 80 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 16 +","+ 1 +","+ 2 +"," + 70 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 17 +","+ 1 +","+ 1 +"," + 70 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 18 +","+ 1 +","+ 1 +"," + 70 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 19 +","+ 1 +","+ 2 +"," + 60 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 20 +","+ 1 +","+ 3 +"," + 60 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 21 +","+ 1 +","+ 3 +"," + 60 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 22 +","+ 1 +","+ 2 +"," + 50 + ");");
+        mydatabase.execSQL("INSERT INTO Registros VALUES("+ 23 +","+ 1 +","+ 1 +"," + 50 + ");");*/
         /* PRUEBA SQLITE
         SQLiteDatabase mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
         //mydatabase.execSQL("DROP TABLE Registros;");
@@ -65,7 +101,9 @@ public class MainActivity extends Activity {
             }while(resultSet.moveToNext());
         }
         resultSet.close();*/
-        Cursor resultSet = mydatabase.rawQuery("Select Ruido, count(*) as cuenta from Registros where Hora = 17 group by ruido order by cuenta DESC;", null);
+
+        /* Dar preferencias
+        Cursor resultSet = mydatabase.rawQuery("Select Ruido, count(*) as cuenta from Registros where Hora = 18 group by ruido order by cuenta DESC;", null);
         resultSet.moveToFirst();
         if (resultSet.moveToFirst()){
             do{
@@ -76,8 +114,20 @@ public class MainActivity extends Activity {
                 // do what ever you want here
             }while(resultSet.moveToNext());
         }
-        resultSet.close();
-        populateSuferenciasDia();
+        resultSet.close();*/
+        //Hora
+        Calendar c = Calendar.getInstance();
+        int hora_act = c.get(Calendar.HOUR_OF_DAY);
+        preferenciaAct = darPreferencia(hora_act);
+        preferencia1hora = darPreferencia(hora_act+1);
+        preferencia2hora = darPreferencia(hora_act+2);
+        System.out.println("Preferencia + + + + + + + + + + "+preferenciaAct);
+        System.out.println("Preferencia + + + + + + + + + + " + preferencia1hora);
+        System.out.println("Preferencia + + + + + + + + + + " + preferencia2hora);
+        listaInterfaz = false;
+        new Solicitar().execute();
+        while(!listaInterfaz){}
+        populateSuferenciasDia(act,f1,f2);
         populateListView();
         registerClickCallback();
     }
@@ -87,6 +137,23 @@ public class MainActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    private int darPreferencia(int hora)
+    {
+        int respuesta = -1;
+        Cursor resultSet = mydatabase.rawQuery("Select Ruido, count(*) as cuenta from Registros where Hora = "+hora+" group by ruido order by cuenta DESC;", null);
+        resultSet.moveToFirst();
+        if (resultSet.moveToFirst()){
+                String ruido = resultSet.getString(0);
+                System.out.println("Ruido SQL: "+ ruido);
+                String cuenta = resultSet.getString(1);
+                System.out.println("Cuenta SQL: "+ cuenta);
+                respuesta = Integer.parseInt(ruido);
+            // do what ever you want here
+        }
+        resultSet.close();
+        return respuesta;
     }
 
     //JSON ejemplo: {"dia":"6","hora":"12","ruido":"78","lugar":"3"}
@@ -162,15 +229,19 @@ public class MainActivity extends Activity {
 
     private class Solicitar extends AsyncTask<URL, Integer, Long> {
         protected Long doInBackground(URL... urls) {
-            llamarHTTP(7,15,70);
-            llamarHTTP(7,16,60);
-            llamarHTTP(7,17,60);
+            Calendar c = Calendar.getInstance();
+            int hora = c.get(Calendar.HOUR_OF_DAY);
+            int dia = c.get(Calendar.DAY_OF_WEEK);
+            act = llamarHTTP(dia,hora,preferenciaAct);
+            f1 = llamarHTTP(dia,hora+1,preferencia1hora);
+            f2 = llamarHTTP(dia,hora+2,preferencia2hora);
+            listaInterfaz = true;
             return 0L;
         }
 
-        private void llamarHTTP(int diaP, int horaP, int ruidoP)
+        private Registro[] llamarHTTP(int diaP, int horaP, int ruidoP)
         {
-
+            Registro[] a_entregar = new Registro[3];
             try {
                 String url = "http://157.253.205.30/api/darSugerencia";
                 URL object = new URL(url);
@@ -214,10 +285,19 @@ public class MainActivity extends Activity {
                     }
 
                     br.close();
-
+                    String res = sb.toString();
                     System.out.println("- - - - - - Respuesta del servidor - - - - - -");
-                    System.out.println("" + sb.toString());
+                    System.out.println("" + res);
                     System.out.println("- - - - - - Respuesta del servidor - - - - - -");
+                    JSONArray objetoJSON_recepcion = new JSONArray(res);
+                    for (int i=0;i<objetoJSON_recepcion.length() && i<3;i++)
+                    {
+                        JSONObject o = objetoJSON_recepcion.getJSONObject(i);
+                        Registro r = new Registro(horaP,o.getString("confianza"),o.getInt("lugar"),o.getInt("ruido"));
+                        a_entregar[i] = r;
+                    }
+                    System.out.println("- - - - - - Objeto JSON - - - - - -");
+                    System.out.println(objetoJSON_recepcion);
 
                 } else {
                     System.out.println(con.getResponseMessage());
@@ -227,6 +307,7 @@ public class MainActivity extends Activity {
             {
                 System.out.println(e.fillInStackTrace());
             }
+            return a_entregar;
         }
 
         protected void onPostExecute(Long result) {
@@ -319,10 +400,34 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void populateSuferenciasDia() {
+    public String darNombreLugar(int id)
+    {
+        if(id == 97)
+        {
+            return "ML";
+        }
+        else
+        {
+            return "SD";
+        }
+    }
+
+    public int darFoto(int id)
+    {
+        if(id == 97)
+        {
+            return R.drawable.ml;
+        }
+        else
+        {
+            return R.drawable.ml;
+        }
+    }
+
+    public void populateSuferenciasDia(Registro[] r1,Registro[] r2,Registro[] r3) {
         Instancia instancia = Instancia.darInstancia();
 
-        instancia.agregarSugerencia(new SugerenciaDia("ml", 50, 8, R.drawable.ml));
+        instancia.agregarSugerencia(new SugerenciaDia(darNombreLugar(r1[0].darLugar()), r1[0].darRuido(), r1[0].darHora(), darFoto(r1[0].darLugar())));
         instancia.agregarSugerencia(new SugerenciaDia("ml", 45, 9, R.drawable.sd));
         instancia.agregarSugerencia(new SugerenciaDia("ml", 70, 10, R.drawable.w));
     }

@@ -6,14 +6,14 @@ package com.example.carolinapinzon.micampusuniandes;
 public class Registro {
 
     private int hora;
-    private int dia;
+    private String confianza;
     private int lugar;
     private int ruido;
 
-    public Registro(int horaP, int diaP, int lugarP, int ruidoP)
+    public Registro(int horaP, String confianzaP, int lugarP, int ruidoP)
     {
         hora = horaP;
-        dia = diaP;
+        confianza = confianzaP;
         lugar = lugarP;
         ruido = ruidoP;
     }
@@ -23,9 +23,9 @@ public class Registro {
         return hora;
     }
 
-    public int darDia()
+    public String darConfianza()
     {
-        return dia;
+        return confianza;
     }
 
     public int darLugar()
@@ -36,5 +36,10 @@ public class Registro {
     public int darRuido()
     {
         return ruido;
+    }
+
+    public String toString()
+    {
+        return "hora: "+hora+"; confianza: "+confianza+"; lugar: "+lugar+"; ruido: "+ruido;
     }
 }
