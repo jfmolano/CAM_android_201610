@@ -1,8 +1,10 @@
 package com.example.carolinapinzon.micampusuniandes;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
@@ -38,15 +40,19 @@ public class MainActivity extends Activity {
     private int lugar;
     private SQLiteDatabase mydatabase;
     private boolean listaInterfaz;
-    int preferenciaAct;
-    int preferencia1hora;
-    int preferencia2hora;
-    Registro[] act;
-    Registro[] f1;
-    Registro[] f2;
+    private int preferenciaAct;
+    private int preferencia1hora;
+    private int preferencia2hora;
+    private Registro[] act;
+    private Registro[] f1;
+    private Registro[] f2;
+    private Activity esta;
+    private ProgressDialog PD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //new MyAsync().execute();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ruido = 0;
@@ -260,7 +266,7 @@ public class MainActivity extends Activity {
                 int hora = c.get(Calendar.HOUR_OF_DAY);
                 objetoJSON.put("hora",""+horaP);
                 int ruidoInt = (int)ruido;
-                objetoJSON.put("ruido", ""+ruidoP);
+                objetoJSON.put("ruido", "" + ruidoP);
                 //objetoJSON.put("lugar", ""+lugar);
 
                 System.out.println(objetoJSON);
@@ -330,6 +336,31 @@ public class MainActivity extends Activity {
 
         protected void onPostExecute(Long result) {
             System.out.println("Ruido " + ruido + " dB");
+        }
+    }
+
+    private class MyAsync extends AsyncTask {
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+            PD = new ProgressDialog(MainActivity.this);
+            PD.setTitle("Please Wait..");
+            PD.setMessage("Loading...");
+            PD.setCancelable(false);
+            PD.show();
+        }
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 
