@@ -122,8 +122,8 @@ public class MainActivity extends Activity {
         }
         resultSet.close();*/
 
-        /* GENERADOR DE REGISTROS
-        for (int i = 0;i<23;i++)
+        //GENERADOR DE REGISTROS
+        for (int i = 0;i<24;i++)
         {
             for (int j = 1;j<8;j++)
             {
@@ -132,7 +132,7 @@ public class MainActivity extends Activity {
                     mydatabase.execSQL("INSERT INTO Registros VALUES("+ i +","+ j +","+ (int)Math.random()*10 +"," + k + ");");
                 }
             }
-        }*/
+        }
         //Hora
         Calendar c = Calendar.getInstance();
         int hora_act = c.get(Calendar.HOUR_OF_DAY);
