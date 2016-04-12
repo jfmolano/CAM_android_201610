@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ruido = 0;
-        lugar = 97;
+        lugar = 2;
         new TareaAudio().execute();
         mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
         //mydatabase.execSQL("DROP TABLE Registros;");
@@ -121,6 +121,18 @@ public class MainActivity extends Activity {
             }while(resultSet.moveToNext());
         }
         resultSet.close();*/
+
+        /* GENERADOR DE REGISTROS
+        for (int i = 0;i<23;i++)
+        {
+            for (int j = 1;j<8;j++)
+            {
+                for (int k = 40;k<100;k+=10)
+                {
+                    mydatabase.execSQL("INSERT INTO Registros VALUES("+ i +","+ j +","+ (int)Math.random()*10 +"," + k + ");");
+                }
+            }
+        }*/
         //Hora
         Calendar c = Calendar.getInstance();
         int hora_act = c.get(Calendar.HOUR_OF_DAY);
@@ -132,7 +144,7 @@ public class MainActivity extends Activity {
         System.out.println("Preferencia + + + + + + + + + + " + preferencia2hora);
         listaInterfaz = false;
         new Solicitar().execute();
-        while(!listaInterfaz){}
+        //while(!listaInterfaz){}
         populateSuferenciasDia(act,f1,f2);
         populateListView();
         registerClickCallback();
@@ -181,10 +193,10 @@ public class MainActivity extends Activity {
                 System.out.println("Objeto a mandar:");
                 Calendar c = Calendar.getInstance();
                 int day_of_week = c.get(Calendar.DAY_OF_WEEK);
-                System.out.println("int day_of_week = c.get(Calendar.DAY_OF_WEEK): - - - : " + day_of_week);
+                //System.out.println("int day_of_week = c.get(Calendar.DAY_OF_WEEK): - - - : " + day_of_week);
                 objetoJSON.put("dia",""+day_of_week);
                 int hora = c.get(Calendar.HOUR_OF_DAY);
-                System.out.println("int hora = c.get(Calendar.HOUR_OF_DAY): - - - : " + hora);
+                //System.out.println("int hora = c.get(Calendar.HOUR_OF_DAY): - - - : " + hora);
                 objetoJSON.put("hora",""+hora);
                 int ruidoInt = (int)ruido;
                 objetoJSON.put("ruido", ""+ruidoInt);
@@ -213,12 +225,12 @@ public class MainActivity extends Activity {
 
                     br.close();
 
-                    System.out.println("- - - - - - - - - - - - - - - - - -");
-                    System.out.println("" + sb.toString());
-                    System.out.println("- - - - - - - - - - - - - - - - - -");
+                    //System.out.println("- - - - - - - - - - - - - - - - - -");
+                    //System.out.println("" + sb.toString());
+                    //System.out.println("- - - - - - - - - - - - - - - - - -");
 
                 } else {
-                    System.out.println(con.getResponseMessage());
+                    //System.out.println(con.getResponseMessage());
                 }
             }
             catch(Exception e)
@@ -229,7 +241,7 @@ public class MainActivity extends Activity {
         }
 
         protected void onPostExecute(Long result) {
-            System.out.println("Downloaded " + result + " bytes");
+            //System.out.println("Downloaded " + result + " bytes");
         }
     }
 
@@ -269,7 +281,7 @@ public class MainActivity extends Activity {
                 objetoJSON.put("ruido", "" + ruidoP);
                 //objetoJSON.put("lugar", ""+lugar);
 
-                System.out.println(objetoJSON);
+                //System.out.println(objetoJSON);
 
                 OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
                 wr.write(objetoJSON.toString());
@@ -279,10 +291,10 @@ public class MainActivity extends Activity {
 
                 StringBuilder sb = new StringBuilder();
                 int HttpResult = con.getResponseCode();
-                System.out.println("Respuesta:");
-                System.out.println(HttpResult);
-                System.out.println("Respuesta esperada:");
-                System.out.println(HttpURLConnection.HTTP_OK);
+                //System.out.println("Respuesta:");
+                //System.out.println(HttpResult);
+                //System.out.println("Respuesta esperada:");
+                //System.out.println(HttpURLConnection.HTTP_OK);
                 if (HttpResult == HttpURLConnection.HTTP_CREATED) {
                     BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
                     String line = null;
@@ -292,9 +304,9 @@ public class MainActivity extends Activity {
 
                     br.close();
                     String res = sb.toString();
-                    System.out.println("- - - - - - Respuesta del servidor - - - - - -");
-                    System.out.println("" + res);
-                    System.out.println("- - - - - - Respuesta del servidor - - - - - -");
+                    //System.out.println("- - - - - - Respuesta del servidor - - - - - -");
+                    //System.out.println("" + res);
+                    //System.out.println("- - - - - - Respuesta del servidor - - - - - -");
                     JSONArray objetoJSON_recepcion = new JSONArray(res);
                     for (int i=0;i<objetoJSON_recepcion.length() && i<3;i++)
                     {
@@ -302,11 +314,11 @@ public class MainActivity extends Activity {
                         Registro r = new Registro(horaP,o.getString("confianza"),o.getInt("lugar"),o.getInt("ruido"));
                         a_entregar[i] = r;
                     }
-                    System.out.println("- - - - - - Objeto JSON - - - - - -");
+                    System.out.println("- - - - - - Sugerencia del servidor - - - - - -");
                     System.out.println(objetoJSON_recepcion);
 
                 } else {
-                    System.out.println(con.getResponseMessage());
+                    //System.out.println(con.getResponseMessage());
                 }
             }
             catch(Exception e)
@@ -317,7 +329,7 @@ public class MainActivity extends Activity {
         }
 
         protected void onPostExecute(Long result) {
-            System.out.println("Downloaded " + result + " bytes");
+            //System.out.println("Downloaded " + result + " bytes");
         }
     }
 
@@ -458,9 +470,10 @@ public class MainActivity extends Activity {
     public void populateSuferenciasDia(Registro[] r1,Registro[] r2,Registro[] r3) {
         Instancia instancia = Instancia.darInstancia();
 
-        instancia.agregarSugerencia(new SugerenciaDia(darNombreLugar(r1[0].darLugar()), r1[0].darRuido(), r1[0].darHora(), darFoto(r1[0].darLugar())));
-        instancia.agregarSugerencia(new SugerenciaDia("ml", 45, 9, R.drawable.sd));
-        instancia.agregarSugerencia(new SugerenciaDia("ml", 70, 10, R.drawable.w));
+        //instancia.agregarSugerencia(new SugerenciaDia(darNombreLugar(r1[0].darLugar()), r1[0].darRuido(), r1[0].darHora(), darFoto(r1[0].darLugar())));
+        instancia.agregarSugerencia(new SugerenciaDia("ML1", 45, 9, R.drawable.sd,new SugerenciaDia("SD10", 45, 9, R.drawable.sd,null,null),new SugerenciaDia("ML8", 45, 9, R.drawable.sd,null,null)));
+        instancia.agregarSugerencia(new SugerenciaDia("ML2", 45, 10, R.drawable.sd,new SugerenciaDia("SD9", 45, 10, R.drawable.sd,null,null),new SugerenciaDia("ML7", 45, 10, R.drawable.sd,null,null)));
+        instancia.agregarSugerencia(new SugerenciaDia("ML3", 45, 11, R.drawable.sd,new SugerenciaDia("SD8", 45, 11, R.drawable.sd,null,null),new SugerenciaDia("ML6", 45, 11, R.drawable.sd,null,null)));
     }
 
     public void populateListView() {

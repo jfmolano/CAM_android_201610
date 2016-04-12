@@ -9,12 +9,16 @@ public class SugerenciaDia {
     private int ruido;
     private int hora;
     private int iconId;
+    private SugerenciaDia s1;
+    private SugerenciaDia s2;
 
-    public SugerenciaDia(String edificio, int ruido, int hora, int iconId) {
+    public SugerenciaDia(String edificio, int ruido, int hora, int iconId,SugerenciaDia s1,SugerenciaDia s2) {
         this.edificio = edificio;
         this.ruido = ruido;
         this.hora = hora;
         this.iconId = iconId;
+        this.s1 = s1;
+        this.s2 = s2;
     }
 
     public String getEdificio() {
@@ -43,6 +47,14 @@ public class SugerenciaDia {
 
     public int getIconId() {
         return iconId;
+    }
+
+    public SugerenciaDia getSug1() {
+        return s1;
+    }
+
+    public SugerenciaDia getSug2() {
+        return s2;
     }
 
     public void setIconId(int iconId) {

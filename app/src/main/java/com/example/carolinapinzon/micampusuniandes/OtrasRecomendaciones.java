@@ -31,10 +31,32 @@ public class OtrasRecomendaciones extends Activity {
             txtOpcion1.setText(s.getEdificio());
 
             TextView txtSonido1 = (TextView)findViewById(R.id.txtSonido1);
-            txtSonido1.setText(s.getEdificio());
+            txtSonido1.setText(""+s.getRuido());
 
             ImageView imgOpcion1 = (ImageView)findViewById(R.id.imgOpcion1);
             imgOpcion1.setImageResource(s.getIconId());
+
+            //Sug1
+
+            TextView txtOpcion2 = (TextView)findViewById(R.id.txtOpcion2);
+            txtOpcion2.setText(s.getSug1().getEdificio());
+
+            TextView txtSonido2 = (TextView)findViewById(R.id.txtSonido2);
+            txtSonido2.setText(""+s.getSug1().getRuido());
+
+            ImageView imgOpcion2 = (ImageView)findViewById(R.id.imgOpcion2);
+            imgOpcion2.setImageResource(s.getSug1().getIconId());
+
+            //Sug2
+
+            TextView txtOpcion3 = (TextView)findViewById(R.id.txtOpcion3);
+            txtOpcion3.setText(s.getSug2().getEdificio());
+
+            TextView txtSonido3 = (TextView)findViewById(R.id.txtSonido3);
+            txtSonido3.setText(""+s.getSug2().getRuido());
+
+            ImageView imgOpcion3 = (ImageView)findViewById(R.id.imgOpcion3);
+            imgOpcion3.setImageResource(s.getSug2().getIconId());
         }
     }
 
