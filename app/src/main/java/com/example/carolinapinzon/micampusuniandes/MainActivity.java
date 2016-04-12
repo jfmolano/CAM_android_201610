@@ -35,6 +35,7 @@ import java.util.Calendar;
 
 
 public class MainActivity extends Activity {
+    private final static String INFO_LOCAL = "- Info. local";
     private MediaRecorder mRecorder = null;
     private double ruido;
     private int lugar;
@@ -56,7 +57,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ruido = 0;
-        lugar = 2;
+        lugar = 3;
         new TareaAudio().execute();
         mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
         //mydatabase.execSQL("DROP TABLE Registros;");
@@ -123,16 +124,19 @@ public class MainActivity extends Activity {
         resultSet.close();*/
 
         //GENERADOR DE REGISTROS
-        for (int i = 0;i<24;i++)
+
+        //mydatabase.execSQL("DELETE from Registros;");
+        /*for (int i = 0;i<24;i++)
         {
             for (int j = 1;j<8;j++)
             {
                 for (int k = 40;k<100;k+=10)
                 {
-                    mydatabase.execSQL("INSERT INTO Registros VALUES("+ i +","+ j +","+ (int)Math.random()*10 +"," + k + ");");
+                    mydatabase.execSQL("INSERT INTO Registros VALUES("+ i +","+ j +","+ (int)(Math.random()*10) +"," + k + ");");
+                    System.out.println("QUERY: " + "INSERT INTO Registros VALUES(" + i + "," + j + "," + (int) (Math.random() * 10) + "," + (k+1) + ");");
                 }
             }
-        }
+        }*/
         //Hora
         Calendar c = Calendar.getInstance();
         int hora_act = c.get(Calendar.HOUR_OF_DAY);
@@ -272,12 +276,8 @@ public class MainActivity extends Activity {
                 con.setRequestMethod("POST");
 
                 JSONObject objetoJSON = new JSONObject();
-                Calendar c = Calendar.getInstance();
-                int day = c.get(Calendar.DAY_OF_WEEK);
                 objetoJSON.put("dia",""+diaP);
-                int hora = c.get(Calendar.HOUR_OF_DAY);
                 objetoJSON.put("hora",""+horaP);
-                int ruidoInt = (int)ruido;
                 objetoJSON.put("ruido", "" + ruidoP);
                 //objetoJSON.put("lugar", ""+lugar);
 
@@ -323,7 +323,32 @@ public class MainActivity extends Activity {
             }
             catch(Exception e)
             {
-                System.out.println(e.fillInStackTrace());
+                System.out.println("Problemas de red");
+                Cursor resultSet = mydatabase.rawQuery("Select Lugar, AVG(Ruido), count(*) as cuenta from Registros where Hora = "+horaP+" and Ruido > "+(ruidoP-1)+" and Ruido < "+(ruidoP+11)+" and Dia = "+diaP+" group by lugar order by cuenta DESC;", null);
+                resultSet.moveToFirst();
+                int l = 0;
+                if (resultSet.moveToFirst()){
+                    do{
+                        String lugar = resultSet.getString(0);
+                        System.out.println("Lugar sugerencia sin red: "+ lugar + "de la hora: "+horaP);
+                        String ruidoNoRed = resultSet.getString(1);
+                        System.out.println("Ruido promedio sin red: "+ ruidoNoRed + "de la hora: "+horaP);
+                        String cuenta = resultSet.getString(2);
+                        System.out.println("Cuenta sin red: "+ cuenta + "de la hora: "+horaP);
+                        System.out.println("-----------------");
+                        System.out.println("-----------------");
+                        int ruidoParseado = (int)Double.parseDouble(ruidoNoRed);
+                        if(l<3)
+                        {
+                            Registro r = new Registro(horaP,"",Integer.parseInt(lugar)+10,ruidoParseado);
+                            a_entregar[l] = r;
+                        }
+                        l++;
+                        // do what ever you want here
+                    }while(resultSet.moveToNext());
+                }
+                resultSet.close();
+                System.out.print("Lista la query");
             }
             return a_entregar;
         }
@@ -447,11 +472,11 @@ public class MainActivity extends Activity {
     {
         if(id == 0)
         {
-            return "ML 1";
+            return "ML S1";
         }
         else if(id == 1)
         {
-            return "ML 3";
+            return "ML 2";
         }
         else if(id == 2)
         {
@@ -475,23 +500,59 @@ public class MainActivity extends Activity {
         }
         else if(id == 7)
         {
-            return "ML S1";
-        }
-        else if(id == 8)
-        {
             return "SD 7";
         }
-        else if(id == 9)
+        else if(id == 8)
         {
             return "SD 8";
         }
-        else if(id == 8)
+        else if(id == 9)
         {
             return "SD 9";
         }
+        else if(id == 10)
+        {
+            return "ML S1 "+INFO_LOCAL;
+        }
+        else if(id == 11)
+        {
+            return "ML 2 "+INFO_LOCAL;
+        }
+        else if(id == 12)
+        {
+            return "ML 4 "+INFO_LOCAL;
+        }
+        else if(id == 13)
+        {
+            return "ML 5 "+INFO_LOCAL;
+        }
+        else if(id == 14)
+        {
+            return "ML 6 "+INFO_LOCAL;
+        }
+        else if(id == 15)
+        {
+            return "ML 7 "+INFO_LOCAL;
+        }
+        else if(id == 16)
+        {
+            return "ML 8 "+INFO_LOCAL;
+        }
+        else if(id == 17)
+        {
+            return "SD 7 "+INFO_LOCAL;
+        }
+        else if(id == 18)
+        {
+            return "SD 8 "+INFO_LOCAL;
+        }
+        else if(id == 19)
+        {
+            return "SD 9 "+INFO_LOCAL;
+        }
         else
         {
-            return "SD 10";
+            return "SD 9 "+INFO_LOCAL;
         }
     }
 
@@ -499,7 +560,7 @@ public class MainActivity extends Activity {
     {
         if(id == 0)
         {
-            return R.drawable.ml1;
+            return R.drawable.mls1;
         }
         else if(id == 1)
         {
@@ -527,23 +588,19 @@ public class MainActivity extends Activity {
         }
         else if(id == 7)
         {
-            return R.drawable.mls1;
-        }
-        else if(id == 8)
-        {
             return R.drawable.sd7;
         }
-        else if(id == 9)
+        else if(id == 8)
         {
             return R.drawable.sd8;
         }
-        else if(id == 8)
+        else if(id == 9)
         {
             return R.drawable.sd9;
         }
         else
         {
-            return R.drawable.sd10;
+            return R.drawable.sd9;
         }
     }
 
