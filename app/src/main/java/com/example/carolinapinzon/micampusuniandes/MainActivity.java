@@ -144,7 +144,7 @@ public class MainActivity extends Activity {
         System.out.println("Preferencia + + + + + + + + + + " + preferencia2hora);
         listaInterfaz = false;
         new Solicitar().execute();
-        //while(!listaInterfaz){}
+        while(!listaInterfaz){}
         populateSuferenciasDia(act,f1,f2);
         populateListView();
         registerClickCallback();
@@ -445,35 +445,132 @@ public class MainActivity extends Activity {
 
     public String darNombreLugar(int id)
     {
-        if(id == 97)
+        if(id == 0)
         {
-            return "ML";
+            return "ML 1";
+        }
+        else if(id == 1)
+        {
+            return "ML 3";
+        }
+        else if(id == 2)
+        {
+            return "ML 4";
+        }
+        else if(id == 3)
+        {
+            return "ML 5";
+        }
+        else if(id == 4)
+        {
+            return "ML 6";
+        }
+        else if(id == 5)
+        {
+            return "ML 7";
+        }
+        else if(id == 6)
+        {
+            return "ML 8";
+        }
+        else if(id == 7)
+        {
+            return "ML S1";
+        }
+        else if(id == 8)
+        {
+            return "SD 7";
+        }
+        else if(id == 9)
+        {
+            return "SD 8";
+        }
+        else if(id == 8)
+        {
+            return "SD 9";
         }
         else
         {
-            return "SD";
+            return "SD 10";
         }
     }
 
     public int darFoto(int id)
     {
-        if(id == 97)
+        if(id == 0)
         {
-            return R.drawable.ml;
+            return R.drawable.ml1;
+        }
+        else if(id == 1)
+        {
+            return R.drawable.ml3;
+        }
+        else if(id == 2)
+        {
+            return R.drawable.ml4;
+        }
+        else if(id == 3)
+        {
+            return R.drawable.ml5;
+        }
+        else if(id == 4)
+        {
+            return R.drawable.ml6;
+        }
+        else if(id == 5)
+        {
+            return R.drawable.ml7;
+        }
+        else if(id == 6)
+        {
+            return R.drawable.ml8;
+        }
+        else if(id == 7)
+        {
+            return R.drawable.mls1;
+        }
+        else if(id == 8)
+        {
+            return R.drawable.sd7;
+        }
+        else if(id == 9)
+        {
+            return R.drawable.sd8;
+        }
+        else if(id == 8)
+        {
+            return R.drawable.sd9;
         }
         else
         {
-            return R.drawable.ml;
+            return R.drawable.sd10;
         }
     }
 
     public void populateSuferenciasDia(Registro[] r1,Registro[] r2,Registro[] r3) {
         Instancia instancia = Instancia.darInstancia();
-
+        System.out.println("S Principal ACT");
+        System.out.println(r1[0]);
+        System.out.println("S 1 ACT");
+        System.out.println(r1[1]);
+        System.out.println("S 2 ACT");
+        System.out.println(r1[2]);
+        System.out.println("S Principal T1");
+        System.out.println(r2[0]);
+        System.out.println("S 1 T1");
+        System.out.println(r2[1]);
+        System.out.println("S 2 T1");
+        System.out.println(r2[2]);
+        System.out.println("S Principal T2");
+        System.out.println(r3[0]);
+        System.out.println("S 1 T2");
+        System.out.println(r3[1]);
+        System.out.println("S 2 T2");
+        System.out.println(r3[2]);
         //instancia.agregarSugerencia(new SugerenciaDia(darNombreLugar(r1[0].darLugar()), r1[0].darRuido(), r1[0].darHora(), darFoto(r1[0].darLugar())));
-        instancia.agregarSugerencia(new SugerenciaDia("ML1", 45, 9, R.drawable.sd,new SugerenciaDia("SD10", 45, 9, R.drawable.sd,null,null),new SugerenciaDia("ML8", 45, 9, R.drawable.sd,null,null)));
-        instancia.agregarSugerencia(new SugerenciaDia("ML2", 45, 10, R.drawable.sd,new SugerenciaDia("SD9", 45, 10, R.drawable.sd,null,null),new SugerenciaDia("ML7", 45, 10, R.drawable.sd,null,null)));
-        instancia.agregarSugerencia(new SugerenciaDia("ML3", 45, 11, R.drawable.sd,new SugerenciaDia("SD8", 45, 11, R.drawable.sd,null,null),new SugerenciaDia("ML6", 45, 11, R.drawable.sd,null,null)));
+        instancia.agregarSugerencia(new SugerenciaDia(darNombreLugar(r1[0].darLugar()), r1[0].darRuido(), r1[0].darHora(), darFoto(r1[0].darLugar()),new SugerenciaDia(darNombreLugar(r1[1].darLugar()), r1[1].darRuido(), r1[1].darHora(), darFoto(r1[1].darLugar()),null,null),new SugerenciaDia(darNombreLugar(r1[2].darLugar()), r1[2].darRuido(), r1[2].darHora(), darFoto(r1[2].darLugar()),null,null)));
+        instancia.agregarSugerencia(new SugerenciaDia(darNombreLugar(r2[0].darLugar()), r2[0].darRuido(), r2[0].darHora(), darFoto(r2[0].darLugar()),new SugerenciaDia(darNombreLugar(r2[1].darLugar()), r2[1].darRuido(), r2[1].darHora(), darFoto(r2[1].darLugar()),null,null),new SugerenciaDia(darNombreLugar(r2[2].darLugar()), r2[2].darRuido(), r2[2].darHora(), darFoto(r2[2].darLugar()),null,null)));
+        instancia.agregarSugerencia(new SugerenciaDia(darNombreLugar(r3[0].darLugar()), r3[0].darRuido(), r3[0].darHora(), darFoto(r3[0].darLugar()),new SugerenciaDia(darNombreLugar(r3[1].darLugar()), r3[1].darRuido(), r3[1].darHora(), darFoto(r3[1].darLugar()),null,null),new SugerenciaDia(darNombreLugar(r3[2].darLugar()), r3[2].darRuido(), r3[2].darHora(), darFoto(r3[2].darLugar()),null,null)));
     }
 
     public void populateListView() {
