@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +24,11 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.estimote.sdk.Beacon;
+import com.estimote.sdk.BeaconManager;
+import com.estimote.sdk.Region;
+import com.estimote.sdk.SystemRequirementsChecker;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -31,10 +37,50 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 
 public class MainActivity extends Activity {
+
+    private static final Map<String, List<String>> PLACES_BY_BEACONS;
+
+    // TODO: replace "<major>:<minor>" strings to match your own beacons.
+    static {
+        Map<String, List<String>> placesByBeacons = new HashMap<>();
+        placesByBeacons.put("22504:48827", new ArrayList<String>() {{
+            add("1");
+            // read as: "Heavenly Sandwiches" is closest
+            // to the beacon with major 22504 and minor 48827
+            add("Green & Green Salads");
+            // "Green & Green Salads" is the next closest
+            add("Mini Panini");
+            // "Mini Panini" is the furthest away
+        }});
+        placesByBeacons.put("648:12", new ArrayList<String>() {{
+            add("Mini Panini");
+            add("Green & Green Salads");
+            add("Heavenly Sandwiches");
+        }});
+        PLACES_BY_BEACONS = Collections.unmodifiableMap(placesByBeacons);
+    }
+
+    private List<String> placesNearBeacon(Beacon beacon) {
+        String beaconKey = String.format("%d:%d", beacon.getMajor(), beacon.getMinor());
+        if (PLACES_BY_BEACONS.containsKey(beaconKey)) {
+            return PLACES_BY_BEACONS.get(beaconKey);
+        }
+        return Collections.emptyList();
+    }
+
+    private BeaconManager beaconManager;
+    private Region region;
+
     private final static String INFO_LOCAL = "- Info. local";
     private MediaRecorder mRecorder = null;
     private double ruido;
@@ -56,6 +102,24 @@ public class MainActivity extends Activity {
         //new MyAsync().execute();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        beaconManager = new BeaconManager(this);
+        beaconManager.setRangingListener(new BeaconManager.RangingListener() {
+            @Override
+            public void onBeaconsDiscovered(Region region, List<Beacon> list) {
+                if (!list.isEmpty()) {
+                    Beacon nearestBeacon = list.get(0);
+                    List<String> places = placesNearBeacon(nearestBeacon);
+                    // TODO: update the UI here
+                    String valor = places.get(0);
+                    Log.d("Airport", "Lugares: " + places + "Valor: "+valor);
+                    if(valor.equals("1"))
+                    {
+                        lugar = 5;
+                    }
+                }
+            }
+        });
+        region = new Region("ranged region", UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), null, null);
         ruido = 0;
         lugar = 3;
         new TareaAudio().execute();
@@ -126,7 +190,8 @@ public class MainActivity extends Activity {
         //GENERADOR DE REGISTROS
 
         //mydatabase.execSQL("DELETE from Registros;");
-        /*for (int i = 0;i<24;i++)
+        /*
+        for (int i = 0;i<24;i++)
         {
             for (int j = 1;j<8;j++)
             {
@@ -183,6 +248,7 @@ public class MainActivity extends Activity {
     private class EnviarEstado extends AsyncTask<URL, Integer, Long> {
         protected Long doInBackground(URL... urls) {
             try {
+                Thread.sleep(10000);
                 String url = "http://157.253.205.30/api/registroAdd";
                 URL object = new URL(url);
 
@@ -205,7 +271,7 @@ public class MainActivity extends Activity {
                 int ruidoInt = (int)ruido;
                 objetoJSON.put("ruido", ""+ruidoInt);
                 objetoJSON.put("lugar", ""+lugar);
-                System.out.println("JSON de ruido a mandar");
+                System.out.println("JSON de ruido a mandar: "+objetoJSON);
                 System.out.println(objetoJSON);
 
                 OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
@@ -642,12 +708,12 @@ public class MainActivity extends Activity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked,
-                                        int position, long id) {
+                                    int position, long id) {
 
-                    Intent intent = new Intent(MainActivity.this,OtrasRecomendaciones.class);
-                    intent.putExtra("position", ""+position);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(MainActivity.this, OtrasRecomendaciones.class);
+                intent.putExtra("position", "" + position);
+                startActivity(intent);
+            }
         });
     }
 
@@ -700,5 +766,26 @@ public class MainActivity extends Activity {
 
             return itemView;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SystemRequirementsChecker.checkWithDefaultDialogs(this);
+
+        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+            @Override
+            public void onServiceReady() {
+                beaconManager.startRanging(region);
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        beaconManager.stopRanging(region);
+
+        super.onPause();
     }
 }
