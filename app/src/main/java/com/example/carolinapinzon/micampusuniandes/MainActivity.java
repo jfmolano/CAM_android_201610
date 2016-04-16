@@ -53,19 +53,35 @@ public class MainActivity extends Activity {
     // TODO: replace "<major>:<minor>" strings to match your own beacons.
     static {
         Map<String, List<String>> placesByBeacons = new HashMap<>();
-        placesByBeacons.put("22504:48827", new ArrayList<String>() {{
-            add("1");
-            // read as: "Heavenly Sandwiches" is closest
-            // to the beacon with major 22504 and minor 48827
-            add("Green & Green Salads");
-            // "Green & Green Salads" is the next closest
-            add("Mini Panini");
-            // "Mini Panini" is the furthest away
+        placesByBeacons.put("10:0", new ArrayList<String>() {{
+            add("0");
         }});
-        placesByBeacons.put("648:12", new ArrayList<String>() {{
-            add("Mini Panini");
-            add("Green & Green Salads");
-            add("Heavenly Sandwiches");
+        placesByBeacons.put("10:1", new ArrayList<String>() {{
+            add("1");
+        }});
+        placesByBeacons.put("10:2", new ArrayList<String>() {{
+            add("2");
+        }});
+        placesByBeacons.put("10:3", new ArrayList<String>() {{
+            add("3");
+        }});
+        placesByBeacons.put("10:4", new ArrayList<String>() {{
+            add("4");
+        }});
+        placesByBeacons.put("10:5", new ArrayList<String>() {{
+            add("5");
+        }});
+        placesByBeacons.put("10:6", new ArrayList<String>() {{
+            add("6");
+        }});
+        placesByBeacons.put("10:7", new ArrayList<String>() {{
+            add("7");
+        }});
+        placesByBeacons.put("10:8", new ArrayList<String>() {{
+            add("8");
+        }});
+        placesByBeacons.put("10:9", new ArrayList<String>() {{
+            add("9");
         }});
         PLACES_BY_BEACONS = Collections.unmodifiableMap(placesByBeacons);
     }
@@ -111,17 +127,13 @@ public class MainActivity extends Activity {
                     List<String> places = placesNearBeacon(nearestBeacon);
                     // TODO: update the UI here
                     String valor = places.get(0);
-                    Log.d("Airport", "Lugares: " + places + "Valor: "+valor);
-                    if(valor.equals("1"))
-                    {
-                        lugar = 5;
-                    }
+                    lugar = Integer.parseInt(valor);
                 }
             }
         });
         region = new Region("ranged region", UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), null, null);
         ruido = 0;
-        lugar = 3;
+        lugar = 0;
         new TareaAudio().execute();
         mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
         //mydatabase.execSQL("DROP TABLE Registros;");
@@ -190,7 +202,7 @@ public class MainActivity extends Activity {
         //GENERADOR DE REGISTROS
 
         //mydatabase.execSQL("DELETE from Registros;");
-        /*
+
         for (int i = 0;i<24;i++)
         {
             for (int j = 1;j<8;j++)
@@ -201,7 +213,7 @@ public class MainActivity extends Activity {
                     System.out.println("QUERY: " + "INSERT INTO Registros VALUES(" + i + "," + j + "," + (int) (Math.random() * 10) + "," + (k+1) + ");");
                 }
             }
-        }*/
+        }
         //Hora
         Calendar c = Calendar.getInstance();
         int hora_act = c.get(Calendar.HOUR_OF_DAY);
