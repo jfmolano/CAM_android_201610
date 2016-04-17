@@ -53,34 +53,34 @@ public class MainActivity extends Activity {
     // TODO: replace "<major>:<minor>" strings to match your own beacons.
     static {
         Map<String, List<String>> placesByBeacons = new HashMap<>();
-        placesByBeacons.put("10:0", new ArrayList<String>() {{
+        placesByBeacons.put("0:10", new ArrayList<String>() {{
             add("0");
         }});
-        placesByBeacons.put("10:1", new ArrayList<String>() {{
+        placesByBeacons.put("1:10", new ArrayList<String>() {{
             add("1");
         }});
-        placesByBeacons.put("10:2", new ArrayList<String>() {{
+        placesByBeacons.put("2:10", new ArrayList<String>() {{
             add("2");
         }});
-        placesByBeacons.put("10:3", new ArrayList<String>() {{
+        placesByBeacons.put("3:10", new ArrayList<String>() {{
             add("3");
         }});
-        placesByBeacons.put("10:4", new ArrayList<String>() {{
+        placesByBeacons.put("4:10", new ArrayList<String>() {{
             add("4");
         }});
-        placesByBeacons.put("10:5", new ArrayList<String>() {{
+        placesByBeacons.put("5:10", new ArrayList<String>() {{
             add("5");
         }});
-        placesByBeacons.put("10:6", new ArrayList<String>() {{
+        placesByBeacons.put("6:10", new ArrayList<String>() {{
             add("6");
         }});
-        placesByBeacons.put("10:7", new ArrayList<String>() {{
+        placesByBeacons.put("7:10", new ArrayList<String>() {{
             add("7");
         }});
-        placesByBeacons.put("10:8", new ArrayList<String>() {{
+        placesByBeacons.put("8:10", new ArrayList<String>() {{
             add("8");
         }});
-        placesByBeacons.put("10:9", new ArrayList<String>() {{
+        placesByBeacons.put("9:10", new ArrayList<String>() {{
             add("9");
         }});
         PLACES_BY_BEACONS = Collections.unmodifiableMap(placesByBeacons);
@@ -554,7 +554,7 @@ public class MainActivity extends Activity {
         }
         else if(id == 1)
         {
-            return "ML 2";
+            return "ML 3";
         }
         else if(id == 2)
         {
@@ -594,7 +594,7 @@ public class MainActivity extends Activity {
         }
         else if(id == 11)
         {
-            return "ML 2 "+INFO_LOCAL;
+            return "ML 3 "+INFO_LOCAL;
         }
         else if(id == 12)
         {
