@@ -202,7 +202,7 @@ public class MainActivity extends Activity {
         //GENERADOR DE REGISTROS
 
         //mydatabase.execSQL("DELETE from Registros;");
-
+        /*
         for (int i = 0;i<24;i++)
         {
             for (int j = 1;j<8;j++)
@@ -213,7 +213,7 @@ public class MainActivity extends Activity {
                     System.out.println("QUERY: " + "INSERT INTO Registros VALUES(" + i + "," + j + "," + (int) (Math.random() * 10) + "," + (k+1) + ");");
                 }
             }
-        }
+        }*/
         //Hora
         Calendar c = Calendar.getInstance();
         int hora_act = c.get(Calendar.HOUR_OF_DAY);
@@ -673,6 +673,46 @@ public class MainActivity extends Activity {
             return R.drawable.sd8;
         }
         else if(id == 9)
+        {
+            return R.drawable.sd9;
+        }
+        else if(id == 10)
+        {
+            return R.drawable.mls1;
+        }
+        else if(id == 11)
+        {
+            return R.drawable.ml3;
+        }
+        else if(id == 12)
+        {
+            return R.drawable.ml4;
+        }
+        else if(id == 13)
+        {
+            return R.drawable.ml5;
+        }
+        else if(id == 14)
+        {
+            return R.drawable.ml6;
+        }
+        else if(id == 15)
+        {
+            return R.drawable.ml7;
+        }
+        else if(id == 16)
+        {
+            return R.drawable.ml8;
+        }
+        else if(id == 17)
+        {
+            return R.drawable.sd7;
+        }
+        else if(id == 18)
+        {
+            return R.drawable.sd8;
+        }
+        else if(id == 19)
         {
             return R.drawable.sd9;
         }
