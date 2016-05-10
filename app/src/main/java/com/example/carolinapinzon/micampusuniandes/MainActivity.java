@@ -101,6 +101,9 @@ public class MainActivity extends Activity {
     private MediaRecorder mRecorder = null;
     private double ruido;
     private int lugar;
+    private int temperatura;
+    private int humedad;
+    private int luz;
     private SQLiteDatabase mydatabase;
     private boolean listaInterfaz;
     private int preferenciaAct;
@@ -134,10 +137,13 @@ public class MainActivity extends Activity {
         region = new Region("ranged region", UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), null, null);
         ruido = 0;
         lugar = 0;
+        temperatura = 18;
+        humedad = 28;
+        luz = 50;
         new TareaAudio().execute();
         mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
         //mydatabase.execSQL("DROP TABLE Registros;");
-        mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Registros(Hora INT,Dia INT,Lugar INT,Ruido INT);");
+        mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Registros(Hora INT,Dia INT,Lugar INT,Ruido INT,Luz INT,Temperatura INT,Humedad INT);");
         /*
         mydatabase.execSQL("INSERT INTO Registros VALUES("+ 0 +","+ 1 +","+ 1 +"," + 50 + ");");
         mydatabase.execSQL("INSERT INTO Registros VALUES(" + 1 + "," + 1 + "," + 2 + "," + 50 + ");");
@@ -202,16 +208,26 @@ public class MainActivity extends Activity {
         //GENERADOR DE REGISTROS
 
         //mydatabase.execSQL("DELETE from Registros;");
-        /*
-        for (int i = 0;i<24;i++)
+
+        /*for (int i = 0;i<24;i++)
         {
             for (int j = 1;j<8;j++)
             {
                 for (int k = 40;k<100;k+=10)
                 {
-                    mydatabase.execSQL("INSERT INTO Registros VALUES("+ i +","+ j +","+ (int)(Math.random()*10) +"," + k + ");");
-                    System.out.println("QUERY: " + "INSERT INTO Registros VALUES(" + i + "," + j + "," + (int) (Math.random() * 10) + "," + (k+1) + ");");
+                    for (int l = 0;l<100;l+=10)
+                    {
+                        for (int m = 0;m<40;m+=5)
+                        {
+                            for (int n = 0;n<100;n+=10)
+                            {
+                                mydatabase.execSQL("INSERT INTO Registros VALUES("+ i +","+ j +","+ (int)(Math.random()*10) +"," + k + "," + l + "," + m + "," + n + ");");
+                                //System.out.println("QUERY: " + "INSERT INTO Registros VALUES("+ i +","+ j +","+ (int)(Math.random()*10) +"," + k + "," + l + "," + m + "," + n + ");");
+                            }
+                        }
+                    }
                 }
+                                System.out.println("QUERY: "+ i +" , "+ j );
             }
         }*/
         //Hora
@@ -241,12 +257,12 @@ public class MainActivity extends Activity {
     private int darPreferencia(int hora)
     {
         int respuesta = -1;
-        Cursor resultSet = mydatabase.rawQuery("Select Ruido, count(*) as cuenta from Registros where Hora = "+hora+" group by ruido order by cuenta DESC;", null);
+        Cursor resultSet = mydatabase.rawQuery("Select Ruido, Luz, Temperatura, Humedad, count(*) as cuenta from Registros where Hora = "+hora+" group by ruido, luz, temperatura, humedad order by cuenta DESC;", null);
         resultSet.moveToFirst();
         if (resultSet.moveToFirst()){
                 String ruido = resultSet.getString(0);
                 System.out.println("Ruido SQL: "+ ruido);
-                String cuenta = resultSet.getString(1);
+                String cuenta = resultSet.getString(4);
                 System.out.println("Cuenta SQL: "+ cuenta);
                 respuesta = Integer.parseInt(ruido);
             // do what ever you want here
@@ -444,7 +460,7 @@ public class MainActivity extends Activity {
             Calendar c = Calendar.getInstance();
             int day = c.get(Calendar.DAY_OF_WEEK);
             int hora = c.get(Calendar.HOUR_OF_DAY);
-            mydatabase.execSQL("INSERT INTO Registros VALUES("+ hora +","+ day +","+ lugar +"," + ((int)ruido/10)*10 + ");");
+            mydatabase.execSQL("INSERT INTO Registros VALUES("+ hora +","+ day +","+ lugar +"," + ((int)ruido/10)*10 + ","+ (luz/10)*10 +","+ (temperatura/10)*10 +","+ (humedad/10)*10 +");");
             new EnviarEstado().execute();
             return 0L;
         }
