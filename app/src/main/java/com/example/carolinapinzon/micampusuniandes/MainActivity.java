@@ -236,9 +236,9 @@ public class MainActivity extends Activity {
         preferenciaAct = darPreferencia(hora_act);
         preferencia1hora = darPreferencia(hora_act+1);
         preferencia2hora = darPreferencia(hora_act+2);
-        System.out.println("Preferencia + + + + + + + + + + "+preferenciaAct);
-        System.out.println("Preferencia + + + + + + + + + + " + preferencia1hora);
-        System.out.println("Preferencia + + + + + + + + + + " + preferencia2hora);
+        System.out.println("Preferencia + + + + + + + + + + Ruido: "+preferenciaAct[0]+" Luz: "+preferenciaAct[1]+" Temperatura: "+preferenciaAct[2]+" Humedad: "+preferenciaAct[3]);
+        System.out.println("Preferencia + + + + + + + + + + Ruido: "+preferencia1hora[0]+" Luz: "+preferencia1hora[1]+" Temperatura: "+preferencia1hora[2]+" Humedad: "+preferencia1hora[3]);
+        System.out.println("Preferencia + + + + + + + + + + Ruido: "+preferencia2hora[0]+" Luz: "+preferencia2hora[1]+" Temperatura: "+preferencia2hora[2]+" Humedad: "+preferencia2hora[3]);
         listaInterfaz = false;
         new Solicitar().execute();
         while(!listaInterfaz){}
@@ -263,11 +263,11 @@ public class MainActivity extends Activity {
                 String ruido = resultSet.getString(0);
                 System.out.println("Ruido SQL: "+ ruido);
                 String luz = resultSet.getString(1);
-                System.out.println("Ruido SQL: "+ ruido);
+                System.out.println("Luz SQL: "+ luz);
                 String temp = resultSet.getString(2);
-                System.out.println("Ruido SQL: "+ ruido);
+                System.out.println("Tempertarura SQL: "+ temp);
                 String hum = resultSet.getString(3);
-                System.out.println("Ruido SQL: "+ ruido);
+                System.out.println("Humedad SQL: "+ hum);
                 String cuenta = resultSet.getString(4);
                 System.out.println("Cuenta SQL: "+ cuenta);
                 respuesta[0] = Integer.parseInt(ruido);
@@ -307,6 +307,9 @@ public class MainActivity extends Activity {
                 objetoJSON.put("hora",""+hora);
                 int ruidoInt = (int)ruido;
                 objetoJSON.put("ruido", ""+ruidoInt);
+                objetoJSON.put("temperatura", ""+temperatura);
+                objetoJSON.put("luz", ""+luz);
+                objetoJSON.put("humedad", ""+humedad);
                 objetoJSON.put("lugar", ""+lugar);
                 System.out.println("JSON de ruido a mandar: "+objetoJSON);
                 System.out.println(objetoJSON);
@@ -417,7 +420,7 @@ public class MainActivity extends Activity {
                     for (int i=0;i<objetoJSON_recepcion.length() && i<3;i++)
                     {
                         JSONObject o = objetoJSON_recepcion.getJSONObject(i);
-                        Registro r = new Registro(horaP,o.getString("confianza"),o.getInt("lugar"),o.getInt("ruido"));
+                        Registro r = new Registro(horaP,o.getString("confianza"),o.getInt("lugar"),o.getInt("ruido"),o.getInt("luz"),o.getInt("temperatura"),o.getInt("humedad"));
                         a_entregar[i] = r;
                     }
                     System.out.println("- - - - - - Sugerencia del servidor - - - - - -");
@@ -430,7 +433,7 @@ public class MainActivity extends Activity {
             catch(Exception e)
             {
                 System.out.println("Problemas de red");
-                Cursor resultSet = mydatabase.rawQuery("Select Lugar, AVG(Ruido), count(*) as cuenta from Registros where Hora = "+horaP+" and Ruido > "+(ruidoP-1)+" and Ruido < "+(ruidoP+11)+" and Dia = "+diaP+" group by lugar order by cuenta DESC;", null);
+                Cursor resultSet = mydatabase.rawQuery("Select Lugar, AVG(Ruido), count(*) as cuenta, AVG(Luz), AVG(Temperatura), AVG(Humedad) from Registros where Hora = "+horaP+" and Ruido > "+(ruidoP-1)+" and Ruido < "+(ruidoP+11) +" and Luz > "+(luzP-1)+" and Luz < "+(luzP+11)+" and Temperatura > "+(tempP-1)+" and Temperatura < "+(tempP+6)+" and Humedad > "+(humP-1)+" and Humedad < "+(humP+11)+" and Dia = "+diaP+" group by lugar order by cuenta DESC;", null);
                 resultSet.moveToFirst();
                 int l = 0;
                 if (resultSet.moveToFirst()){
@@ -440,13 +443,16 @@ public class MainActivity extends Activity {
                         String ruidoNoRed = resultSet.getString(1);
                         System.out.println("Ruido promedio sin red: "+ ruidoNoRed + "de la hora: "+horaP);
                         String cuenta = resultSet.getString(2);
+                        String luzPar = resultSet.getString(3);
+                        String tempPar = resultSet.getString(4);
+                        String humPar = resultSet.getString(5);
                         System.out.println("Cuenta sin red: "+ cuenta + "de la hora: "+horaP);
                         System.out.println("-----------------");
                         System.out.println("-----------------");
                         int ruidoParseado = (int)Double.parseDouble(ruidoNoRed);
                         if(l<3)
                         {
-                            Registro r = new Registro(horaP,"",Integer.parseInt(lugar)+10,ruidoParseado);
+                            Registro r = new Registro(horaP,"",Integer.parseInt(lugar)+10,ruidoParseado,(int) Double.parseDouble(luzPar),(int) Double.parseDouble(tempPar),(int) Double.parseDouble(humPar));
                             a_entregar[l] = r;
                         }
                         l++;
@@ -771,7 +777,7 @@ public class MainActivity extends Activity {
         System.out.println("S 2 T2");
         System.out.println(r3[2]);
         //instancia.agregarSugerencia(new SugerenciaDia(darNombreLugar(r1[0].darLugar()), r1[0].darRuido(), r1[0].darHora(), darFoto(r1[0].darLugar())));
-        instancia.agregarSugerencia(new SugerenciaDia(darNombreLugar(r1[0].darLugar()), r1[0].darRuido(), r1[0].darHora(), darFoto(r1[0].darLugar()),new SugerenciaDia(darNombreLugar(r1[1].darLugar()), r1[1].darRuido(), r1[1].darHora(), darFoto(r1[1].darLugar()),null,null),new SugerenciaDia(darNombreLugar(r1[2].darLugar()), r1[2].darRuido(), r1[2].darHora(), darFoto(r1[2].darLugar()),null,null)));
+        instancia.agregarSugerencia(new SugerenciaDia(darNombreLugar(r1[0].darLugar())+" Luz: "+r1[0].darLuz()+" Temperatura: "+r1[0].darTemperatura()+" Humedad: "+r1[0].darHumedad(), r1[0].darRuido(), r1[0].darHora(), darFoto(r1[0].darLugar()),new SugerenciaDia(darNombreLugar(r1[1].darLugar()), r1[1].darRuido(), r1[1].darHora(), darFoto(r1[1].darLugar()),null,null),new SugerenciaDia(darNombreLugar(r1[2].darLugar()), r1[2].darRuido(), r1[2].darHora(), darFoto(r1[2].darLugar()),null,null)));
         instancia.agregarSugerencia(new SugerenciaDia(darNombreLugar(r2[0].darLugar()), r2[0].darRuido(), r2[0].darHora(), darFoto(r2[0].darLugar()),new SugerenciaDia(darNombreLugar(r2[1].darLugar()), r2[1].darRuido(), r2[1].darHora(), darFoto(r2[1].darLugar()),null,null),new SugerenciaDia(darNombreLugar(r2[2].darLugar()), r2[2].darRuido(), r2[2].darHora(), darFoto(r2[2].darLugar()),null,null)));
         instancia.agregarSugerencia(new SugerenciaDia(darNombreLugar(r3[0].darLugar()), r3[0].darRuido(), r3[0].darHora(), darFoto(r3[0].darLugar()),new SugerenciaDia(darNombreLugar(r3[1].darLugar()), r3[1].darRuido(), r3[1].darHora(), darFoto(r3[1].darLugar()),null,null),new SugerenciaDia(darNombreLugar(r3[2].darLugar()), r3[2].darRuido(), r3[2].darHora(), darFoto(r3[2].darLugar()),null,null)));
     }
