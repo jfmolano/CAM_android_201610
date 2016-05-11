@@ -106,9 +106,9 @@ public class MainActivity extends Activity {
     private int luz;
     private SQLiteDatabase mydatabase;
     private boolean listaInterfaz;
-    private int preferenciaAct;
-    private int preferencia1hora;
-    private int preferencia2hora;
+    private int[] preferenciaAct;
+    private int[] preferencia1hora;
+    private int[] preferencia2hora;
     private Registro[] act;
     private Registro[] f1;
     private Registro[] f2;
@@ -254,17 +254,26 @@ public class MainActivity extends Activity {
         return true;
     }
 
-    private int darPreferencia(int hora)
+    private int[] darPreferencia(int hora)
     {
-        int respuesta = -1;
+        int[] respuesta = new int[4];
         Cursor resultSet = mydatabase.rawQuery("Select Ruido, Luz, Temperatura, Humedad, count(*) as cuenta from Registros where Hora = "+hora+" group by ruido, luz, temperatura, humedad order by cuenta DESC;", null);
         resultSet.moveToFirst();
         if (resultSet.moveToFirst()){
                 String ruido = resultSet.getString(0);
                 System.out.println("Ruido SQL: "+ ruido);
+                String luz = resultSet.getString(1);
+                System.out.println("Ruido SQL: "+ ruido);
+                String temp = resultSet.getString(2);
+                System.out.println("Ruido SQL: "+ ruido);
+                String hum = resultSet.getString(3);
+                System.out.println("Ruido SQL: "+ ruido);
                 String cuenta = resultSet.getString(4);
                 System.out.println("Cuenta SQL: "+ cuenta);
-                respuesta = Integer.parseInt(ruido);
+                respuesta[0] = Integer.parseInt(ruido);
+                respuesta[1] = Integer.parseInt(luz);
+                respuesta[2] = Integer.parseInt(temp);
+                respuesta[3] = Integer.parseInt(hum);
             // do what ever you want here
         }
         resultSet.close();
@@ -277,7 +286,7 @@ public class MainActivity extends Activity {
         protected Long doInBackground(URL... urls) {
             try {
                 Thread.sleep(10000);
-                String url = "http://157.253.205.30/api/registroAdd";
+                String url = "http://157.253.205.40/api/registroAdd";
                 URL object = new URL(url);
 
                 HttpURLConnection con = (HttpURLConnection) object.openConnection();
@@ -348,18 +357,18 @@ public class MainActivity extends Activity {
             Calendar c = Calendar.getInstance();
             int hora = c.get(Calendar.HOUR_OF_DAY);
             int dia = c.get(Calendar.DAY_OF_WEEK);
-            act = llamarHTTP(dia,hora,preferenciaAct);
-            f1 = llamarHTTP(dia,hora+1,preferencia1hora);
-            f2 = llamarHTTP(dia,hora+2,preferencia2hora);
+            act = llamarHTTP(dia,hora,preferenciaAct[0],preferenciaAct[1],preferenciaAct[2],preferenciaAct[3]);
+            f1 = llamarHTTP(dia,hora+1,preferencia1hora[0],preferencia1hora[1],preferencia1hora[2],preferencia1hora[3]);
+            f2 = llamarHTTP(dia,hora+2,preferencia2hora[0],preferencia2hora[1],preferencia2hora[2],preferencia2hora[3]);
             listaInterfaz = true;
             return 0L;
         }
 
-        private Registro[] llamarHTTP(int diaP, int horaP, int ruidoP)
+        private Registro[] llamarHTTP(int diaP, int horaP, int ruidoP, int luzP, int tempP, int humP)
         {
             Registro[] a_entregar = new Registro[3];
             try {
-                String url = "http://157.253.205.30/api/darSugerencia";
+                String url = "http://157.253.205.40/api/darSugerencia";
                 URL object = new URL(url);
 
                 HttpURLConnection con = (HttpURLConnection) object.openConnection();
@@ -372,7 +381,10 @@ public class MainActivity extends Activity {
                 JSONObject objetoJSON = new JSONObject();
                 objetoJSON.put("dia",""+diaP);
                 objetoJSON.put("hora",""+horaP);
-                objetoJSON.put("ruido", "" + ruidoP);
+                objetoJSON.put("ruido",""+ruidoP);
+                objetoJSON.put("luz", ""+luzP);
+                objetoJSON.put("temperatura",""+tempP);
+                objetoJSON.put("humedad",""+humP);
                 //objetoJSON.put("lugar", ""+lugar);
 
                 //System.out.println(objetoJSON);
