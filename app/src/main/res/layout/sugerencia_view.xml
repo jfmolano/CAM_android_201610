@@ -58,6 +58,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Luz: 100"
+        android:id="@+id/txtLuz"
+        android:layout_below="@+id/txtSonido"
+        android:layout_alignStart="@+id/txtSonido"
+        android:paddingTop="5dp"
+        android:paddingLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Temperatura: 18°"
+        android:id="@+id/txtTemperatura"
+        android:layout_below="@+id/txtLuz"
+        android:layout_alignStart="@+id/txtLuz"
+        android:paddingTop="5dp"
+        android:paddingLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Humedad: 28%"
+        android:id="@+id/txtHumedad"
+        android:layout_below="@+id/txtTemperatura"
+        android:layout_alignStart="@+id/txtTemperatura"
+        android:paddingTop="5dp"
+        android:paddingLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="8:00"
         android:id="@+id/txtHora"
         android:layout_alignParentTop="true"

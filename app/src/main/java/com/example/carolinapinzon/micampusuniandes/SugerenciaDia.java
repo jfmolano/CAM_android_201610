@@ -7,14 +7,20 @@ public class SugerenciaDia {
 
     private String edificio;
     private int ruido;
+    private int luz;
+    private int temperatura;
+    private int humedad;
     private int hora;
     private int iconId;
     private SugerenciaDia s1;
     private SugerenciaDia s2;
 
-    public SugerenciaDia(String edificio, int ruido, int hora, int iconId,SugerenciaDia s1,SugerenciaDia s2) {
+    public SugerenciaDia(String edificio, int ruido, int luz, int temperatura, int humedad, int hora, int iconId,SugerenciaDia s1,SugerenciaDia s2) {
         this.edificio = edificio;
         this.ruido = ruido;
+        this.luz = luz;
+        this.temperatura = temperatura;
+        this.humedad = humedad;
         this.hora = hora;
         this.iconId = iconId;
         this.s1 = s1;
@@ -31,6 +37,18 @@ public class SugerenciaDia {
 
     public int getHora() {
         return hora;
+    }
+
+    public int getLuz() {
+        return luz;
+    }
+
+    public int getTemperatura() {
+        return temperatura;
+    }
+
+    public int getHumedad() {
+        return humedad;
     }
 
     public void setEdificio(String edificio) {
