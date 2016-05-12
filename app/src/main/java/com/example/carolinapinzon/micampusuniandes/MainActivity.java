@@ -3,6 +3,9 @@ package com.example.carolinapinzon.micampusuniandes;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -11,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +37,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -43,6 +50,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -114,6 +122,17 @@ public class MainActivity extends Activity {
     private Registro[] f2;
     private Activity esta;
     private ProgressDialog PD;
+    //Lectura BT
+    BluetoothAdapter mBluetoothAdapter;
+    BluetoothSocket mmSocket;
+    BluetoothDevice mmDevice;
+    OutputStream mmOutputStream;
+    InputStream mmInputStream;
+    Thread workerThread;
+    byte[] readBuffer;
+    int readBufferPosition;
+    int counter;
+    volatile boolean stopWorker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +149,7 @@ public class MainActivity extends Activity {
                     List<String> places = placesNearBeacon(nearestBeacon);
                     // TODO: update the UI here
                     String valor = places.get(0);
+                    System.out.println("LUGAR: "+valor);
                     lugar = Integer.parseInt(valor);
                 }
             }
@@ -140,6 +160,12 @@ public class MainActivity extends Activity {
         temperatura = 18;
         humedad = 28;
         luz = 50;
+        findBT();
+        try {
+            openBT();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         new TareaAudio().execute();
         mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
         //mydatabase.execSQL("DROP TABLE Registros;");
@@ -873,5 +899,114 @@ public class MainActivity extends Activity {
         beaconManager.stopRanging(region);
 
         super.onPause();
+    }
+
+    //BT
+
+    void findBT()
+    {
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if(mBluetoothAdapter == null)
+        {
+            //myLabel.setText("No bluetooth adapter available");
+            System.out.println("BT: No bluetooth adapter available");
+        }
+
+        if(!mBluetoothAdapter.isEnabled())
+        {
+            Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBluetooth, 0);
+        }
+
+        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+        System.out.println("BT: pairedDevices: "+pairedDevices.size());
+        if(pairedDevices.size() > 0)
+        {
+            for(BluetoothDevice device : pairedDevices)
+            {
+                System.out.println("Nombre: ");
+                System.out.println(device.getName());
+                if(device.getName().equals("HC-05"))
+                {
+                    mmDevice = device;
+                    break;
+                }
+            }
+        }
+        //myLabel.setText("Bluetooth Device Found");
+        System.out.println("BT: Bluetooth Device Found");
+    }
+
+    void openBT() throws IOException
+    {
+        //00001101-0000-1000-8000-00805F9B34FB
+        UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); //Standard SerialPortService ID
+        mmSocket = mmDevice.createRfcommSocketToServiceRecord(uuid);
+        mmSocket.connect();
+        mmOutputStream = mmSocket.getOutputStream();
+        mmInputStream = mmSocket.getInputStream();
+
+        beginListenForData();
+
+        //myLabel.setText("Bluetooth Opened");
+        System.out.println("BT: Bluetooth Opened");
+    }
+
+    void beginListenForData()
+    {
+        final Handler handler = new Handler();
+        final byte delimiter = 10; //This is the ASCII code for a newline character
+
+        stopWorker = false;
+        readBufferPosition = 0;
+        readBuffer = new byte[1024];
+        workerThread = new Thread(new Runnable()
+        {
+            public void run()
+            {
+                while(!Thread.currentThread().isInterrupted() && !stopWorker)
+                {
+                    try
+                    {
+                        int bytesAvailable = mmInputStream.available();
+                        if(bytesAvailable > 0)
+                        {
+                            byte[] packetBytes = new byte[bytesAvailable];
+                            mmInputStream.read(packetBytes);
+                            for(int i=0;i<bytesAvailable;i++)
+                            {
+                                byte b = packetBytes[i];
+                                if(b == delimiter)
+                                {
+                                    byte[] encodedBytes = new byte[readBufferPosition];
+                                    System.arraycopy(readBuffer, 0, encodedBytes, 0, encodedBytes.length);
+                                    final String data = new String(encodedBytes, "US-ASCII");
+                                    readBufferPosition = 0;
+
+                                    handler.post(new Runnable()
+                                    {
+                                        public void run()
+                                        {
+                                            //myLabel.setText(data);
+                                            System.out.println("BT: DATA: "+data);
+                                        }
+                                    });
+                                }
+                                else
+                                {
+                                    readBuffer[readBufferPosition++] = b;
+                                }
+                            }
+                        }
+                    }
+                    catch (IOException ex)
+                    {
+                        stopWorker = true;
+                    }
+                }
+            }
+        });
+
+        workerThread.start();
     }
 }
