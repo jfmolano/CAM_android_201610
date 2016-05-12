@@ -34,7 +34,7 @@ public class OtrasRecomendaciones extends Activity {
             txtSonido1.setText("Ruido: "+s.getRuido()+"dBA");
 
             TextView txtLuz1 = (TextView)findViewById(R.id.txtLuz1);
-            txtLuz1.setText("Nivel de luz: "+s.getLuz()+" %");
+            txtLuz1.setText("Nivel de luz: "+s.getLuz()+" lx");
 
             TextView txtTemperatura1 = (TextView)findViewById(R.id.textTemperatura1);
             txtTemperatura1.setText("Temperatura: "+s.getTemperatura()+ " " + (char) 0x00B0 + "C");
@@ -54,7 +54,7 @@ public class OtrasRecomendaciones extends Activity {
             txtSonido2.setText("Ruido: "+s.getSug1().getRuido()+"dBA");
 
             TextView txtLuz2 = (TextView)findViewById(R.id.textLuz2);
-            txtLuz2.setText("Nivel de luz: "+s.getSug1().getLuz()+" %");
+            txtLuz2.setText("Nivel de luz: "+s.getSug1().getLuz()+" lx");
 
             TextView txtTemperatura2 = (TextView)findViewById(R.id.textTemperatura2);
             txtTemperatura2.setText("Temperatura: "+s.getSug1().getTemperatura()+ " " + (char) 0x00B0 + "C");
@@ -74,7 +74,7 @@ public class OtrasRecomendaciones extends Activity {
             txtSonido3.setText("   Ruido: "+s.getSug2().getRuido()+"dBA");
 
             TextView txtLuz3 = (TextView)findViewById(R.id.textLuz3);
-            txtLuz3.setText("   Nivel de luz: "+s.getSug2().getLuz()+" %");
+            txtLuz3.setText("   Nivel de luz: "+s.getSug2().getLuz()+" lx");
 
             TextView txtTemperatura3 = (TextView)findViewById(R.id.textTemperatura3);
             txtTemperatura3.setText("   Temperatura: "+s.getSug2().getTemperatura()+ " " + (char) 0x00B0 + "C");

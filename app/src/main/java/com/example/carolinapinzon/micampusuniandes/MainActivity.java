@@ -885,7 +885,7 @@ public class MainActivity extends Activity {
             textSonido.setText("Ruido: " + ruido + "dBA - " + nivel);
             //
             TextView textLuz = (TextView) itemView.findViewById(R.id.txtLuz);
-            textLuz.setText("Nivel de luz: " + sugerenciaActual.getLuz() + " %");
+            textLuz.setText("Nivel de luz: " + sugerenciaActual.getLuz() + " lx");
             TextView textTemp = (TextView) itemView.findViewById(R.id.txtTemperatura);
             textTemp.setText("Temperatura: " + sugerenciaActual.getTemperatura() + " " + (char) 0x00B0 + "C");
             TextView textHum = (TextView) itemView.findViewById(R.id.txtHumedad);
