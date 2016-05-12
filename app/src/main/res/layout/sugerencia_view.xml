@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Luz: 100"
+        android:text="Nivel de luz: 100%"
         android:id="@+id/txtLuz"
         android:layout_below="@+id/txtSonido"
         android:layout_alignStart="@+id/txtSonido"

@@ -149,7 +149,7 @@ public class MainActivity extends Activity {
                     List<String> places = placesNearBeacon(nearestBeacon);
                     // TODO: update the UI here
                     String valor = places.get(0);
-                    System.out.println("LUGAR: "+valor);
+                    System.out.println("LUGAR: " + valor);
                     lugar = Integer.parseInt(valor);
                 }
             }
@@ -875,6 +875,13 @@ public class MainActivity extends Activity {
             }
             TextView textSonido = (TextView) itemView.findViewById(R.id.txtSonido);
             textSonido.setText("Sonido: " + ruido + "dBA - " + nivel);
+            //
+            TextView textLuz = (TextView) itemView.findViewById(R.id.txtLuz);
+            textLuz.setText("Nivel de luz: " + sugerenciaActual.getLuz() + " %");
+            TextView textTemp = (TextView) itemView.findViewById(R.id.txtTemperatura);
+            textTemp.setText("Temperatura: " + sugerenciaActual.getLuz() + " °C");
+            TextView textHum = (TextView) itemView.findViewById(R.id.txtHumedad);
+            textHum.setText("Humedad: " + sugerenciaActual.getHumedad() + " %");
 
             return itemView;
         }
@@ -989,6 +996,12 @@ public class MainActivity extends Activity {
                                         {
                                             //myLabel.setText(data);
                                             System.out.println("BT: DATA: "+data);
+                                            String humedadStr = data.substring(10, 12);
+                                            String temperaturaStr = data.substring(31, 33);
+                                            System.out.println("BT: DATA H: "+humedadStr);
+                                            System.out.println("BT: DATA T: "+temperaturaStr);
+                                            humedad = Integer.parseInt(humedadStr);
+                                            temperatura = Integer.parseInt(temperaturaStr);
                                         }
                                     });
                                 }
