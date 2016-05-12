@@ -133,6 +133,8 @@ public class MainActivity extends Activity {
     int readBufferPosition;
     int counter;
     volatile boolean stopWorker;
+    //Luz
+    private DataCollection mDataCollection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,11 +157,12 @@ public class MainActivity extends Activity {
             }
         });
         region = new Region("ranged region", UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), null, null);
+        mDataCollection = new DataCollection(this);
         ruido = 0;
         lugar = 0;
         temperatura = 20;
         humedad = 48;
-        luz = 50;
+        luz = -1;
         findBT();
         try {
             openBT();
@@ -338,6 +341,7 @@ public class MainActivity extends Activity {
                 int ruidoInt = (int)ruido;
                 objetoJSON.put("ruido", ""+ruidoInt);
                 objetoJSON.put("temperatura", ""+temperatura);
+                luz = (int) mDataCollection.darLuzActual();
                 objetoJSON.put("luz", ""+luz);
                 objetoJSON.put("humedad", ""+humedad);
                 objetoJSON.put("lugar", ""+lugar);
