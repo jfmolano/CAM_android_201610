@@ -157,8 +157,8 @@ public class MainActivity extends Activity {
         region = new Region("ranged region", UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), null, null);
         ruido = 0;
         lugar = 0;
-        temperatura = 18;
-        humedad = 28;
+        temperatura = 20;
+        humedad = 48;
         luz = 50;
         findBT();
         try {
@@ -170,6 +170,10 @@ public class MainActivity extends Activity {
         mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
         //mydatabase.execSQL("DROP TABLE Registros;");
         mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Registros(Hora INT,Dia INT,Lugar INT,Ruido INT,Luz INT,Temperatura INT,Humedad INT);");
+        mydatabase.execSQL("DELETE from Registros where temperatura < 11;");
+        mydatabase.execSQL("DELETE from Registros where temperatura > 49;");
+        mydatabase.execSQL("DELETE from Registros where humedad > 69;");
+        mydatabase.execSQL("DELETE from Registros where humedad < 21;");
         /*
         mydatabase.execSQL("INSERT INTO Registros VALUES("+ 0 +","+ 1 +","+ 1 +"," + 50 + ");");
         mydatabase.execSQL("INSERT INTO Registros VALUES(" + 1 + "," + 1 + "," + 2 + "," + 50 + ");");
@@ -874,12 +878,12 @@ public class MainActivity extends Activity {
                 nivel = "Muy Alto";
             }
             TextView textSonido = (TextView) itemView.findViewById(R.id.txtSonido);
-            textSonido.setText("Sonido: " + ruido + "dBA - " + nivel);
+            textSonido.setText("Ruido: " + ruido + "dBA - " + nivel);
             //
             TextView textLuz = (TextView) itemView.findViewById(R.id.txtLuz);
             textLuz.setText("Nivel de luz: " + sugerenciaActual.getLuz() + " %");
             TextView textTemp = (TextView) itemView.findViewById(R.id.txtTemperatura);
-            textTemp.setText("Temperatura: " + sugerenciaActual.getLuz() + " °C");
+            textTemp.setText("Temperatura: " + sugerenciaActual.getTemperatura() + " " + (char) 0x00B0 + "C");
             TextView textHum = (TextView) itemView.findViewById(R.id.txtHumedad);
             textHum.setText("Humedad: " + sugerenciaActual.getHumedad() + " %");
 

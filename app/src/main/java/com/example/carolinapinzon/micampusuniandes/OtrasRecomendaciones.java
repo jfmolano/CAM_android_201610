@@ -31,7 +31,16 @@ public class OtrasRecomendaciones extends Activity {
             txtOpcion1.setText(s.getEdificio());
 
             TextView txtSonido1 = (TextView)findViewById(R.id.txtSonido1);
-            txtSonido1.setText(""+s.getRuido());
+            txtSonido1.setText("Ruido: "+s.getRuido()+"dBA");
+
+            TextView txtLuz1 = (TextView)findViewById(R.id.txtLuz1);
+            txtLuz1.setText("Nivel de luz: "+s.getLuz()+" %");
+
+            TextView txtTemperatura1 = (TextView)findViewById(R.id.textTemperatura1);
+            txtTemperatura1.setText("Temperatura: "+s.getTemperatura()+ " " + (char) 0x00B0 + "C");
+
+            TextView txtHumedad1 = (TextView)findViewById(R.id.textHumedad1);
+            txtHumedad1.setText("Humedad: "+s.getHumedad()+" %");
 
             ImageView imgOpcion1 = (ImageView)findViewById(R.id.imgOpcion1);
             imgOpcion1.setImageResource(s.getIconId());
@@ -42,7 +51,16 @@ public class OtrasRecomendaciones extends Activity {
             txtOpcion2.setText(s.getSug1().getEdificio());
 
             TextView txtSonido2 = (TextView)findViewById(R.id.txtSonido2);
-            txtSonido2.setText(""+s.getSug1().getRuido());
+            txtSonido2.setText("Ruido: "+s.getSug1().getRuido()+"dBA");
+
+            TextView txtLuz2 = (TextView)findViewById(R.id.textLuz2);
+            txtLuz2.setText("Nivel de luz: "+s.getSug1().getLuz()+" %");
+
+            TextView txtTemperatura2 = (TextView)findViewById(R.id.textTemperatura2);
+            txtTemperatura2.setText("Temperatura: "+s.getSug1().getTemperatura()+ " " + (char) 0x00B0 + "C");
+
+            TextView txtHumedad2 = (TextView)findViewById(R.id.textHumedad2);
+            txtHumedad2.setText("Humedad: "+s.getSug1().getHumedad()+" %");
 
             ImageView imgOpcion2 = (ImageView)findViewById(R.id.imgOpcion2);
             imgOpcion2.setImageResource(s.getSug1().getIconId());
@@ -50,10 +68,19 @@ public class OtrasRecomendaciones extends Activity {
             //Sug2
 
             TextView txtOpcion3 = (TextView)findViewById(R.id.txtOpcion3);
-            txtOpcion3.setText(s.getSug2().getEdificio());
+            txtOpcion3.setText("   "+s.getSug2().getEdificio());
 
             TextView txtSonido3 = (TextView)findViewById(R.id.txtSonido3);
-            txtSonido3.setText(""+s.getSug2().getRuido());
+            txtSonido3.setText("   Ruido: "+s.getSug2().getRuido()+"dBA");
+
+            TextView txtLuz3 = (TextView)findViewById(R.id.textLuz3);
+            txtLuz3.setText("   Nivel de luz: "+s.getSug2().getLuz()+" %");
+
+            TextView txtTemperatura3 = (TextView)findViewById(R.id.textTemperatura3);
+            txtTemperatura3.setText("   Temperatura: "+s.getSug2().getTemperatura()+ " " + (char) 0x00B0 + "C");
+
+            TextView txtHumedad3 = (TextView)findViewById(R.id.textHumedad3);
+            txtHumedad3.setText("   Humedad: "+s.getSug2().getHumedad()+" %");
 
             ImageView imgOpcion3 = (ImageView)findViewById(R.id.imgOpcion3);
             imgOpcion3.setImageResource(s.getSug2().getIconId());
