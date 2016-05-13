@@ -58,7 +58,7 @@ import java.util.Set;
 import java.util.UUID;
 
 
-public class MainActivity extends Activity implements LocationListener {
+public class MainActivity extends Activity {
 
     private static final Map<String, List<String>> PLACES_BY_BEACONS;
 
@@ -150,7 +150,11 @@ public class MainActivity extends Activity implements LocationListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,2000, 1, this);
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        longitud = location.getLongitude();
+        System.out.println("longitud = location.getLongitude(): "+longitud);
+        latitud = location.getLatitude();
+        System.out.println("latitud = location.getLatitude(): "+latitud);
         beaconManager = new BeaconManager(this);
         beaconManager.setRangingListener(new BeaconManager.RangingListener() {
             @Override
@@ -1043,27 +1047,4 @@ public class MainActivity extends Activity implements LocationListener {
         workerThread.start();
     }
 
-    public void onLocationChanged(Location location) {
-        String msg = "New Latitude: " + location.getLatitude()
-                + "New Longitude: " + location.getLongitude();
-        longitud = location.getLongitude();
-        latitud = location.getLatitude();
-        //Toast.makeText(getBaseContext(), msg, Toast.LENGTH_LONG).show();
-    }
-
-    public void onProviderDisabled(String provider) {
-
-        //
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-        //
-    }
-
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        //
-    }
 }
