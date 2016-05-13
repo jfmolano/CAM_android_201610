@@ -11,10 +11,14 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,7 +58,7 @@ import java.util.Set;
 import java.util.UUID;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements LocationListener {
 
     private static final Map<String, List<String>> PLACES_BY_BEACONS;
 
@@ -112,6 +116,8 @@ public class MainActivity extends Activity {
     private int temperatura;
     private int humedad;
     private int luz;
+    private double latitud;
+    private double longitud;
     private SQLiteDatabase mydatabase;
     private boolean listaInterfaz;
     private int[] preferenciaAct;
@@ -122,6 +128,7 @@ public class MainActivity extends Activity {
     private Registro[] f2;
     private Activity esta;
     private ProgressDialog PD;
+    private LocationManager locationManager;
     //Lectura BT
     BluetoothAdapter mBluetoothAdapter;
     BluetoothSocket mmSocket;
@@ -142,6 +149,8 @@ public class MainActivity extends Activity {
         //new MyAsync().execute();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,2000, 1, this);
         beaconManager = new BeaconManager(this);
         beaconManager.setRangingListener(new BeaconManager.RangingListener() {
             @Override
@@ -160,6 +169,9 @@ public class MainActivity extends Activity {
         mDataCollection = new DataCollection(this);
         ruido = 0;
         lugar = 0;
+        //4.59 - 4.61 : -74.08 - -74.04
+        latitud = 0;
+        longitud = 0;
         temperatura = 20;
         humedad = 48;
         luz = -1;
@@ -1029,5 +1041,29 @@ public class MainActivity extends Activity {
         });
 
         workerThread.start();
+    }
+
+    public void onLocationChanged(Location location) {
+        String msg = "New Latitude: " + location.getLatitude()
+                + "New Longitude: " + location.getLongitude();
+        longitud = location.getLongitude();
+        latitud = location.getLatitude();
+        //Toast.makeText(getBaseContext(), msg, Toast.LENGTH_LONG).show();
+    }
+
+    public void onProviderDisabled(String provider) {
+
+        //
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+        //
+    }
+
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        //
     }
 }
