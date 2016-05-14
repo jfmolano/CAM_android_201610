@@ -33,7 +33,6 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="longitud" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="DEBUG" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
@@ -65,14 +64,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20348836">
-              <caret line="153" column="40" selection-start-line="153" selection-start-column="32" selection-end-line="153" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1086" column="0" selection-start-line="1086" selection-start-column="0" selection-end-line="1086" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataCollection.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/DataCollection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.77272725">
+              <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -225,71 +234,6 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="4166" column="16" selection-start-line="4166" selection-start-column="16" selection-end-line="4166" selection-end-column="16" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Location.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/location/Location.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="555" column="18" selection-start-line="555" selection-start-column="18" selection-end-line="555" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#32357#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#4096#4097#0" expanded="false" />
-                <element signature="e#4132#4133#0" expanded="false" />
-                <element signature="e#4259#4260#0" expanded="false" />
-                <element signature="e#4281#4282#0" expanded="false" />
-                <element signature="e#17644#17645#0" expanded="false" />
-                <element signature="e#17676#17677#0" expanded="false" />
-                <element signature="e#17802#17803#0" expanded="false" />
-                <element signature="e#17838#17839#0" expanded="false" />
-                <element signature="e#18664#18665#0" expanded="false" />
-                <element signature="e#18692#18693#0" expanded="false" />
-                <element signature="e#18915#18916#0" expanded="false" />
-                <element signature="e#18943#18944#0" expanded="false" />
-                <element signature="e#19675#19676#0" expanded="false" />
-                <element signature="e#19719#19720#0" expanded="false" />
-                <element signature="e#19948#19949#0" expanded="false" />
-                <element signature="e#19992#19993#0" expanded="false" />
-                <element signature="e#20187#20188#0" expanded="false" />
-                <element signature="e#20219#20220#0" expanded="false" />
-                <element signature="e#20320#20321#0" expanded="false" />
-                <element signature="e#20356#20357#0" expanded="false" />
-                <element signature="e#20554#20555#0" expanded="false" />
-                <element signature="e#20587#20588#0" expanded="false" />
-                <element signature="e#20691#20692#0" expanded="false" />
-                <element signature="e#20729#20730#0" expanded="false" />
-                <element signature="e#20827#20828#0" expanded="false" />
-                <element signature="e#20862#20863#0" expanded="false" />
-                <element signature="e#21088#21089#0" expanded="false" />
-                <element signature="e#21120#21121#0" expanded="false" />
-                <element signature="e#21776#21777#0" expanded="false" />
-                <element signature="e#21808#21809#0" expanded="false" />
-                <element signature="e#22004#22005#0" expanded="false" />
-                <element signature="e#22033#22034#0" expanded="false" />
-                <element signature="e#22635#22636#0" expanded="false" />
-                <element signature="e#22669#22670#0" expanded="false" />
-                <element signature="e#23051#23052#0" expanded="false" />
-                <element signature="e#23082#23083#0" expanded="false" />
-                <element signature="e#24072#24073#0" expanded="false" />
-                <element signature="e#24107#24108#0" expanded="false" />
-                <element signature="e#25191#25192#0" expanded="false" />
-                <element signature="e#25223#25224#0" expanded="false" />
-                <element signature="e#27641#27642#0" expanded="false" />
-                <element signature="e#27671#27672#0" expanded="false" />
-                <element signature="e#27818#27819#0" expanded="false" />
-                <element signature="e#27888#27889#0" expanded="false" />
-                <element signature="e#28937#28938#0" expanded="false" />
-                <element signature="e#28984#28985#0" expanded="false" />
-                <element signature="e#29985#29986#0" expanded="false" />
-                <element signature="e#30034#30035#0" expanded="false" />
-                <element signature="e#30092#30093#0" expanded="false" />
-                <element signature="e#30116#30117#0" expanded="false" />
-                <element signature="e#31967#31968#0" expanded="false" />
-                <element signature="e#32009#32010#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -1759,12 +1703,12 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/SugerenciaDia.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/sugerencia_view.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_otras_recomendaciones.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/DataCollection.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/OtrasRecomendaciones.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout-sw600dp-land/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout-sw600dp/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/DataCollection.java" />
       </list>
     </option>
   </component>
@@ -2283,7 +2227,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2293,10 +2237,10 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4642857" sideWeight="0.5151976" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36734694" sideWeight="0.3700608" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6530612" sideWeight="0.19528875" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.4544073" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36734694" sideWeight="0.6299392" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6530612" sideWeight="0.8047112" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2639,13 +2583,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/DataCollection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/SugerenciaDia.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2887,11 +2824,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20348836">
-          <caret line="153" column="40" selection-start-line="153" selection-start-column="32" selection-end-line="153" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1086" column="0" selection-start-line="1086" selection-start-column="0" selection-end-line="1086" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/DataCollection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.77272725">
+          <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>

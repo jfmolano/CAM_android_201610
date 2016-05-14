@@ -46,6 +46,6 @@ public class DataCollection implements SensorEventListener {
     }
 
     public float darLuzActual(){
-        return luz;
+        return luz/600 + 1;
     }
 }
