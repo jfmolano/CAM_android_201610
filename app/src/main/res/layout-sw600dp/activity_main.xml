@@ -97,7 +97,7 @@
                 android:minHeight="60dp"
                 android:minWidth="60dp"
                 android:adjustViewBounds="true"
-                android:layout_alignTop="@+id/textView27"
+                android:layout_alignTop="@+id/txtRuiOp3"
                 android:layout_alignParentStart="true" />
 
             <TextView
@@ -132,7 +132,7 @@
                 android:paddingLeft="0dp"
                 android:paddingTop="20dp"
                 android:paddingBottom="5dp"
-                android:layout_below="@+id/textView31"
+                android:layout_below="@+id/txtTemOp2"
                 android:layout_alignParentStart="true" />
 
             <TextView
@@ -191,7 +191,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Sonido: 50dBA - Medio"
                 android:textSize="13dp"
-                android:id="@+id/textView24"
+                android:id="@+id/txtRuiOp2"
                 android:paddingTop="5dp"
                 android:paddingLeft="10dp"
                 android:layout_below="@+id/txtEdOp2"
@@ -203,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="ML"
-                android:id="@+id/textView26"
+                android:id="@+id/txtEdOp3"
                 android:textStyle="bold"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
@@ -216,11 +216,11 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Sonido: 50dBA - Medio"
                 android:textSize="13dp"
-                android:id="@+id/textView27"
+                android:id="@+id/txtRuiOp3"
                 android:paddingTop="5dp"
                 android:paddingLeft="10dp"
-                android:layout_below="@+id/textView26"
-                android:layout_alignStart="@+id/textView26"
+                android:layout_below="@+id/txtEdOp3"
+                android:layout_alignStart="@+id/txtEdOp3"
                 android:layout_marginTop="-5dp" />
 
             <TextView
@@ -255,10 +255,10 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Nivel de luz: 50%"
                 android:textSize="13dp"
-                android:id="@+id/textView30"
+                android:id="@+id/txtLuzOp2"
                 android:paddingTop="5dp"
                 android:paddingLeft="10dp"
-                android:layout_below="@+id/textView24"
+                android:layout_below="@+id/txtRuiOp2"
                 android:layout_toEndOf="@+id/imageView3"
                 android:layout_marginTop="-5dp" />
 
@@ -268,11 +268,11 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Temperatura: 30 °C"
                 android:textSize="13dp"
-                android:id="@+id/textView31"
+                android:id="@+id/txtTemOp2"
                 android:paddingTop="5dp"
                 android:paddingLeft="10dp"
-                android:layout_below="@+id/textView30"
-                android:layout_alignStart="@+id/textView30"
+                android:layout_below="@+id/txtLuzOp2"
+                android:layout_alignStart="@+id/txtLuzOp2"
                 android:layout_marginTop="-5dp" />
 
             <TextView
@@ -281,11 +281,11 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Humedad: 30%"
                 android:textSize="13dp"
-                android:id="@+id/textView32"
+                android:id="@+id/txtHumOp2"
                 android:paddingTop="5dp"
                 android:paddingLeft="10dp"
-                android:layout_below="@+id/textView31"
-                android:layout_alignStart="@+id/textView31"
+                android:layout_below="@+id/txtTemOp2"
+                android:layout_alignStart="@+id/txtTemOp2"
                 android:layout_marginTop="-5dp" />
 
             <TextView
@@ -294,11 +294,11 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Nivel de luz: 50%"
                 android:textSize="13dp"
-                android:id="@+id/textView33"
+                android:id="@+id/txtLuzOp3"
                 android:paddingTop="5dp"
                 android:paddingLeft="10dp"
-                android:layout_below="@+id/textView27"
-                android:layout_alignStart="@+id/textView26"
+                android:layout_below="@+id/txtRuiOp3"
+                android:layout_alignStart="@+id/txtEdOp3"
                 android:layout_marginTop="-5dp" />
 
             <TextView
@@ -307,11 +307,11 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Temperatura: 30 °C"
                 android:textSize="13dp"
-                android:id="@+id/textView34"
+                android:id="@+id/txtTemOp3"
                 android:paddingTop="5dp"
                 android:paddingLeft="10dp"
-                android:layout_below="@+id/textView33"
-                android:layout_alignStart="@+id/textView33"
+                android:layout_below="@+id/txtLuzOp3"
+                android:layout_alignStart="@+id/txtLuzOp3"
                 android:layout_marginTop="-5dp" />
 
             <TextView
@@ -320,11 +320,11 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Humedad: 30%"
                 android:textSize="13dp"
-                android:id="@+id/textView35"
+                android:id="@+id/txtHumOp3"
                 android:paddingTop="5dp"
                 android:paddingLeft="10dp"
-                android:layout_below="@+id/textView34"
-                android:layout_alignStart="@+id/textView34"
+                android:layout_below="@+id/txtTemOp3"
+                android:layout_alignStart="@+id/txtTemOp3"
                 android:layout_marginTop="-5dp" />
 
         </RelativeLayout>
