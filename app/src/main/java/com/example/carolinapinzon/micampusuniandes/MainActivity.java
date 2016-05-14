@@ -1000,6 +1000,8 @@ public class MainActivity extends Activity {
                         textSug1Temp.setText("Temperatura: "+act[0].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug1Humedad = (TextView)findViewById(R.id.txtHumOp1);
                         textSug1Humedad.setText("Humedad: "+act[0].darHumedad()+"%");
+                        ImageView imageView = (ImageView) findViewById(R.id.imageViewEd1);
+                        imageView.setImageResource(darFoto(act[0].darLugar()));
 
                         //Op2
                         TextView textSug2Lugar = (TextView)findViewById(R.id.txtEdOp2);
@@ -1012,6 +1014,8 @@ public class MainActivity extends Activity {
                         textSug2Temp.setText("Temperatura: "+act[1].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug2Humedad = (TextView)findViewById(R.id.txtHumOp2);
                         textSug2Humedad.setText("Humedad: "+act[1].darHumedad()+"%");
+                        ImageView imageView1 = (ImageView) findViewById(R.id.imageViewEd2);
+                        imageView1.setImageResource(darFoto(act[1].darLugar()));
 
                         //Op1
                         TextView textSug3Lugar = (TextView)findViewById(R.id.txtEdOp3);
@@ -1024,6 +1028,8 @@ public class MainActivity extends Activity {
                         textSug3Temp.setText("Temperatura: "+act[2].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug3Humedad = (TextView)findViewById(R.id.txtHumOp3);
                         textSug3Humedad.setText("Humedad: "+act[2].darHumedad()+"%");
+                        ImageView imageView2 = (ImageView) findViewById(R.id.imageViewEd3);
+                        imageView2.setImageResource(darFoto(act[2].darLugar()));
                     }
                     else if(position==1){
                         //Op1
@@ -1037,6 +1043,8 @@ public class MainActivity extends Activity {
                         textSug1Temp.setText("Temperatura: "+f1[0].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug1Humedad = (TextView)findViewById(R.id.txtHumOp1);
                         textSug1Humedad.setText("Humedad: "+f1[0].darHumedad()+"%");
+                        ImageView imageView3 = (ImageView) findViewById(R.id.imageViewEd1);
+                        imageView3.setImageResource(darFoto(f1[0].darLugar()));
 
                         //Op2
                         TextView textSug2Lugar = (TextView)findViewById(R.id.txtEdOp2);
@@ -1049,6 +1057,8 @@ public class MainActivity extends Activity {
                         textSug2Temp.setText("Temperatura: "+f1[1].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug2Humedad = (TextView)findViewById(R.id.txtHumOp2);
                         textSug2Humedad.setText("Humedad: "+f1[1].darHumedad()+"%");
+                        ImageView imageView4 = (ImageView) findViewById(R.id.imageViewEd2);
+                        imageView4.setImageResource(darFoto(f1[1].darLugar()));
 
                         //Op1
                         TextView textSug3Lugar = (TextView)findViewById(R.id.txtEdOp3);
@@ -1061,6 +1071,8 @@ public class MainActivity extends Activity {
                         textSug3Temp.setText("Temperatura: "+f1[2].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug3Humedad = (TextView)findViewById(R.id.txtHumOp3);
                         textSug3Humedad.setText("Humedad: "+f1[2].darHumedad()+"%");
+                        ImageView imageView5 = (ImageView) findViewById(R.id.imageViewEd3);
+                        imageView5.setImageResource(darFoto(f1[2].darLugar()));
                     }
                     else{
                         //Op1
@@ -1074,6 +1086,8 @@ public class MainActivity extends Activity {
                         textSug1Temp.setText("Temperatura: "+f2[0].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug1Humedad = (TextView)findViewById(R.id.txtHumOp1);
                         textSug1Humedad.setText("Humedad: "+f2[0].darHumedad()+"%");
+                        ImageView imageView6 = (ImageView) findViewById(R.id.imageViewEd1);
+                        imageView6.setImageResource(darFoto(f2[0].darLugar()));
 
                         //Op2
                         TextView textSug2Lugar = (TextView)findViewById(R.id.txtEdOp2);
@@ -1086,6 +1100,8 @@ public class MainActivity extends Activity {
                         textSug2Temp.setText("Temperatura: "+f2[1].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug2Humedad = (TextView)findViewById(R.id.txtHumOp2);
                         textSug2Humedad.setText("Humedad: "+f2[1].darHumedad()+"%");
+                        ImageView imageView7 = (ImageView) findViewById(R.id.imageViewEd2);
+                        imageView7.setImageResource(darFoto(f2[1].darLugar()));
 
                         //Op1
                         TextView textSug3Lugar = (TextView)findViewById(R.id.txtEdOp3);
@@ -1098,6 +1114,8 @@ public class MainActivity extends Activity {
                         textSug3Temp.setText("Temperatura: "+f2[2].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug3Humedad = (TextView)findViewById(R.id.txtHumOp3);
                         textSug3Humedad.setText("Humedad: "+f2[2].darHumedad()+"%");
+                        ImageView imageView8 = (ImageView) findViewById(R.id.imageViewEd3);
+                        imageView8.setImageResource(darFoto(f2[2].darLugar()));
                     }
                 }
             }

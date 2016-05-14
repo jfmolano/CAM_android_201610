@@ -63,16 +63,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.793103">
-              <caret line="1094" column="86" selection-start-line="1094" selection-start-column="86" selection-end-line="1094" selection-end-column="86" />
+            <state vertical-scroll-proportion="1.6402439">
+              <caret line="1117" column="64" selection-start-line="1117" selection-start-column="64" selection-end-line="1117" selection-end-column="64" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#26773#26783#0" expanded="true" />
-                <element signature="e#39571#48523#0" expanded="true" />
-                <element signature="e#48522#48523#0" expanded="true" />
+                <element signature="e#39571#50072#0" expanded="true" />
+                <element signature="e#50071#50072#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -98,14 +98,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-sw600dp/activity_main.xml">
-          <provider editor-type-id="android-designer">
+          <provider selected="true" editor-type-id="android-designer">
             <state />
           </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33207548">
-              <caret line="153" column="52" selection-start-line="153" selection-start-column="52" selection-end-line="153" selection-end-column="52" />
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.5172415">
+              <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -2095,17 +2095,17 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3275076" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275076" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.4969605" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4642857" sideWeight="0.5151976" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4030612" sideWeight="0.19528875" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6241497" sideWeight="0.19528875" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.4544073" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4030612" sideWeight="0.8047112" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6241497" sideWeight="0.8047112" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2184,8 +2184,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#26773#26783#0" expanded="true" />
-            <element signature="e#39571#48523#0" expanded="true" />
-            <element signature="e#48522#48523#0" expanded="true" />
+            <element signature="e#39571#50072#0" expanded="true" />
+            <element signature="e#50071#50072#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2247,8 +2247,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#26773#26783#0" expanded="true" />
-            <element signature="e#39571#48523#0" expanded="true" />
-            <element signature="e#48522#48523#0" expanded="true" />
+            <element signature="e#39571#50072#0" expanded="true" />
+            <element signature="e#50071#50072#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2310,8 +2310,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#26773#26783#0" expanded="true" />
-            <element signature="e#39571#48523#0" expanded="true" />
-            <element signature="e#48522#48523#0" expanded="true" />
+            <element signature="e#39571#50072#0" expanded="true" />
+            <element signature="e#50071#50072#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2373,8 +2373,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#26773#26783#0" expanded="true" />
-            <element signature="e#39571#48523#0" expanded="true" />
-            <element signature="e#48522#48523#0" expanded="true" />
+            <element signature="e#39571#50072#0" expanded="true" />
+            <element signature="e#50071#50072#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2386,8 +2386,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#26773#26783#0" expanded="true" />
-            <element signature="e#39571#48523#0" expanded="true" />
-            <element signature="e#48522#48523#0" expanded="true" />
+            <element signature="e#39571#50072#0" expanded="true" />
+            <element signature="e#50071#50072#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2399,8 +2399,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#26773#26783#0" expanded="true" />
-            <element signature="e#39571#48523#0" expanded="true" />
-            <element signature="e#48522#48523#0" expanded="true" />
+            <element signature="e#39571#50072#0" expanded="true" />
+            <element signature="e#50071#50072#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2412,8 +2412,8 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#26773#26783#0" expanded="true" />
-            <element signature="e#39571#48523#0" expanded="true" />
-            <element signature="e#48522#48523#0" expanded="true" />
+            <element signature="e#39571#50072#0" expanded="true" />
+            <element signature="e#50071#50072#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2833,6 +2833,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-sw600dp/activity_main.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.5172415">
+          <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/Registro.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2843,25 +2854,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/carolinapinzon/micampusuniandes/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.793103">
-          <caret line="1094" column="86" selection-start-line="1094" selection-start-column="86" selection-end-line="1094" selection-end-column="86" />
+        <state vertical-scroll-proportion="1.6402439">
+          <caret line="1117" column="64" selection-start-line="1117" selection-start-column="64" selection-end-line="1117" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#26773#26783#0" expanded="true" />
-            <element signature="e#39571#48523#0" expanded="true" />
-            <element signature="e#48522#48523#0" expanded="true" />
+            <element signature="e#39571#50072#0" expanded="true" />
+            <element signature="e#50071#50072#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-sw600dp/activity_main.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33207548">
-          <caret line="153" column="52" selection-start-line="153" selection-start-column="52" selection-end-line="153" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
