@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="C:\Users\JFM\Documents\GitHub\MiCampusUniandesVCaro\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\JFM\Documents\GitHub\MiCampusUniandesVCaro\app\build\intermediates\pre-dexed\debug\classes-0ed913e21a79541d3e8960725fd0354dff3c4de4.jar" />
+    </item>
+    <item
         jar="C:\Users\JFM\Documents\GitHub\MiCampusUniandesVCaro\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
         jumboMode="false"
         revision="23.0.0"
@@ -16,11 +23,11 @@
         <dex dex="C:\Users\JFM\Documents\GitHub\MiCampusUniandesVCaro\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-73beb33cc0c04a2e5ff50aa3d7576cd99bb79498.jar" />
     </item>
     <item
-        jar="C:\Users\JFM\Documents\GitHub\MiCampusUniandesVCaro\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jar="C:\Users\JFM\Documents\GitHub\MiCampusUniandesVCaro\app\build\intermediates\exploded-aar\com.estimote\sdk\0.9.4\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="C:\Users\JFM\Documents\GitHub\MiCampusUniandesVCaro\app\build\intermediates\pre-dexed\debug\classes-0ed913e21a79541d3e8960725fd0354dff3c4de4.jar" />
+        sha1="e3f2bd7d626b065e0960be2404e0af133e7b179b">
+        <dex dex="C:\Users\JFM\Documents\GitHub\MiCampusUniandesVCaro\app\build\intermediates\pre-dexed\debug\classes-c16395b1fb728e38130cd3e22166dd9a566b5c84.jar" />
     </item>
     <item
         jar="C:\Users\JFM\Documents\GitHub\MiCampusUniandesVCaro\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
@@ -28,13 +35,6 @@
         revision="23.0.0"
         sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
         <dex dex="C:\Users\JFM\Documents\GitHub\MiCampusUniandesVCaro\app\build\intermediates\pre-dexed\debug\classes-4ecda9c0101449f962e90d9e8fe9e630b17599b3.jar" />
-    </item>
-    <item
-        jar="C:\Users\JFM\Documents\GitHub\MiCampusUniandesVCaro\app\build\intermediates\exploded-aar\com.estimote\sdk\0.9.4\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="e3f2bd7d626b065e0960be2404e0af133e7b179b">
-        <dex dex="C:\Users\JFM\Documents\GitHub\MiCampusUniandesVCaro\app\build\intermediates\pre-dexed\debug\classes-c16395b1fb728e38130cd3e22166dd9a566b5c84.jar" />
     </item>
 
 </items>

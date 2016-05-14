@@ -1,27 +1,20 @@
 package com.example.carolinapinzon.micampusuniandes;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.content.Intent;
-import android.widget.Toast;
 
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
@@ -894,8 +886,11 @@ public class MainActivity extends Activity {
                 }
                 else{
                     //textView19
-                    TextView textSug1Lugar = (TextView)findViewById(R.id.textView19);
-                    textSug1Lugar.setText(act[0].darLugar());
+                    System.out.println("R.id.textView19: "+R.id.txtEdOp1);
+                    TextView textSug1Lugar = (TextView)findViewById(R.id.txtEdOp1);
+                    System.out.println("TextView: "+textSug1Lugar);
+                    System.out.println("textSug1Lugar.getText(): "+textSug1Lugar.getText());
+                    textSug1Lugar.setText(darNombreLugar(act[0].darLugar()));
                 }
             }
         });}
