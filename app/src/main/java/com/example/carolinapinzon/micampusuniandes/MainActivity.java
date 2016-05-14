@@ -145,12 +145,21 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        System.out.println("locationManager: " + locationManager);
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        longitud = location.getLongitude();
-        System.out.println("longitud = location.getLongitude(): "+longitud);
-        latitud = location.getLatitude();
-        System.out.println("latitud = location.getLatitude(): "+latitud);
-
+        System.out.println("Location: " + location);
+        if(location!=null)
+        {
+            longitud = location.getLongitude();
+            System.out.println("longitud = location.getLongitude(): "+longitud);
+            latitud = location.getLatitude();
+            System.out.println("latitud = location.getLatitude(): "+latitud);
+        }
+        else
+        {
+            longitud = -1;
+            latitud = -1;
+        }
         DisplayMetrics metrics = new DisplayMetrics();
         this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         float yInches= metrics.heightPixels/metrics.ydpi;
@@ -182,18 +191,29 @@ public class MainActivity extends Activity {
         ruido = 0;
         lugar = 0;
         //4.59 - 4.61 : -74.08 - -74.04
-        latitud = 0;
-        longitud = 0;
+        //latitud = 0;
+        //longitud = 0;
         temperatura = 20;
         humedad = 48;
         luz = -1;
-        findBT();
-        try {
-            openBT();
-        } catch (IOException e) {
-            e.printStackTrace();
+        boolean estaEnGeografia = true;
+        if(((latitud > 0 && latitud < 4.59)||(latitud > 4.61))||((longitud < -1 && latitud > -74.04)||(latitud < -74.08)))
+        {
+            estaEnGeografia = false;
+            System.out.println("GEO: No esta en rango geografico");
         }
-        new TareaAudio().execute();
+        else{
+            System.out.println("GEO: Esta en rango geografico");
+        }
+        if(estaEnGeografia){
+            findBT();
+            try {
+                openBT();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            new TareaAudio().execute();
+        }
         mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
         //mydatabase.execSQL("DROP TABLE Registros;");
         mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Registros(Hora INT,Dia INT,Lugar INT,Ruido INT,Luz INT,Temperatura INT,Humedad INT);");
