@@ -19,6 +19,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -129,6 +131,7 @@ public class MainActivity extends Activity {
     private Activity esta;
     private ProgressDialog PD;
     private LocationManager locationManager;
+    private boolean esTablet;
     //Lectura BT
     BluetoothAdapter mBluetoothAdapter;
     BluetoothSocket mmSocket;
@@ -155,6 +158,19 @@ public class MainActivity extends Activity {
         System.out.println("longitud = location.getLongitude(): "+longitud);
         latitud = location.getLatitude();
         System.out.println("latitud = location.getLatitude(): "+latitud);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        float yInches= metrics.heightPixels/metrics.ydpi;
+        float xInches= metrics.widthPixels/metrics.xdpi;
+        double diagonalInches = Math.sqrt(xInches*xInches + yInches*yInches);
+        if (diagonalInches>=6.5){
+// 6.5inch device or bigger
+            esTablet = true;
+        }else{
+// smaller device
+            esTablet = false;
+        }
         beaconManager = new BeaconManager(this);
         beaconManager.setRangingListener(new BeaconManager.RangingListener() {
             @Override
@@ -189,10 +205,10 @@ public class MainActivity extends Activity {
         mydatabase = openOrCreateDatabase("micampus", MODE_PRIVATE, null);
         //mydatabase.execSQL("DROP TABLE Registros;");
         mydatabase.execSQL("CREATE TABLE IF NOT EXISTS Registros(Hora INT,Dia INT,Lugar INT,Ruido INT,Luz INT,Temperatura INT,Humedad INT);");
-        mydatabase.execSQL("DELETE from Registros where temperatura < 11;");
-        mydatabase.execSQL("DELETE from Registros where temperatura > 49;");
-        mydatabase.execSQL("DELETE from Registros where humedad > 69;");
-        mydatabase.execSQL("DELETE from Registros where humedad < 21;");
+        //mydatabase.execSQL("DELETE from Registros where temperatura < 11;");
+        //mydatabase.execSQL("DELETE from Registros where temperatura > 49;");
+        //mydatabase.execSQL("DELETE from Registros where humedad > 69;");
+        //mydatabase.execSQL("DELETE from Registros where humedad < 21;");
         /*
         mydatabase.execSQL("INSERT INTO Registros VALUES("+ 0 +","+ 1 +","+ 1 +"," + 50 + ");");
         mydatabase.execSQL("INSERT INTO Registros VALUES(" + 1 + "," + 1 + "," + 2 + "," + 50 + ");");
@@ -257,8 +273,8 @@ public class MainActivity extends Activity {
         //GENERADOR DE REGISTROS
 
         //mydatabase.execSQL("DELETE from Registros;");
-
-        /*for (int i = 0;i<24;i++)
+        /*
+        for (int i = 0;i<24;i++)
         {
             for (int j = 1;j<8;j++)
             {
@@ -266,9 +282,9 @@ public class MainActivity extends Activity {
                 {
                     for (int l = 0;l<100;l+=10)
                     {
-                        for (int m = 0;m<40;m+=5)
+                        for (int m = 10;m<40;m+=5)
                         {
-                            for (int n = 0;n<100;n+=10)
+                            for (int n = 30;n<70;n+=10)
                             {
                                 mydatabase.execSQL("INSERT INTO Registros VALUES("+ i +","+ j +","+ (int)(Math.random()*10) +"," + k + "," + l + "," + m + "," + n + ");");
                                 //System.out.println("QUERY: " + "INSERT INTO Registros VALUES("+ i +","+ j +","+ (int)(Math.random()*10) +"," + k + "," + l + "," + m + "," + n + ");");
@@ -277,6 +293,28 @@ public class MainActivity extends Activity {
                     }
                 }
                                 System.out.println("QUERY: "+ i +" , "+ j );
+            }
+        }
+
+        for (int i = 0;i<24;i++)
+        {
+            for (int j = 1;j<8;j++)
+            {
+                for (int k = 40;k<100;k+=10)
+                {
+                    for (int l = 0;l<100;l+=10)
+                    {
+                        for (int m = 10;m<40;m+=5)
+                        {
+                            for (int n = 30;n<70;n+=10)
+                            {
+                                mydatabase.execSQL("INSERT INTO Registros VALUES("+ i +","+ j +","+ (int)(Math.random()*10) +"," + k + "," + l + "," + m + "," + n + ");");
+                                //System.out.println("QUERY: " + "INSERT INTO Registros VALUES("+ i +","+ j +","+ (int)(Math.random()*10) +"," + k + "," + l + "," + m + "," + n + ");");
+                            }
+                        }
+                    }
+                }
+                System.out.println("QUERY: "+ i +" , "+ j );
             }
         }*/
         //Hora
@@ -836,21 +874,31 @@ public class MainActivity extends Activity {
         Instancia instancia = Instancia.darInstancia();
         ArrayAdapter<SugerenciaDia> adapter = new MyListAdapter(instancia);
         ListView list = (ListView) findViewById(R.id.sugerenciasListView);
-        list.setAdapter(adapter);
+        if(list!=null){
+            list.setAdapter(adapter);
+        }
     }
 
     private void registerClickCallback() {
         ListView list = (ListView) findViewById(R.id.sugerenciasListView);
+        if(list!=null){
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked,
                                     int position, long id) {
-
-                Intent intent = new Intent(MainActivity.this, OtrasRecomendaciones.class);
-                intent.putExtra("position", "" + position);
-                startActivity(intent);
+                if(!esTablet)
+                {
+                    Intent intent = new Intent(MainActivity.this, OtrasRecomendaciones.class);
+                    intent.putExtra("position", "" + position);
+                    startActivity(intent);
+                }
+                else{
+                    //textView19
+                    TextView textSug1Lugar = (TextView)findViewById(R.id.textView19);
+                    textSug1Lugar.setText(act[0].darLugar());
+                }
             }
-        });
+        });}
     }
 
     public class MyListAdapter extends ArrayAdapter<SugerenciaDia> {
