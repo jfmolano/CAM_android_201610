@@ -137,6 +137,8 @@ public class MainActivity extends Activity {
     volatile boolean stopWorker;
     //Luz
     private DataCollection mDataCollection;
+    //MAPA
+    private ArrayList<Registro> mapaArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -344,6 +346,7 @@ public class MainActivity extends Activity {
         populateSuferenciasDia(act,f1,f2);
         populateListView();
         registerClickCallback();
+        new PedirMapa().execute();
     }
 
     @Override
@@ -487,7 +490,7 @@ public class MainActivity extends Activity {
                 objetoJSON.put("ruido",""+ruidoP);
                 objetoJSON.put("luz", ""+luzP);
                 objetoJSON.put("temperatura",""+tempP);
-                objetoJSON.put("humedad",""+humP);
+                objetoJSON.put("humedad", "" + humP);
                 //objetoJSON.put("lugar", ""+lugar);
 
                 //System.out.println(objetoJSON);
@@ -561,6 +564,85 @@ public class MainActivity extends Activity {
                 }
                 resultSet.close();
                 System.out.print("Lista la query");
+            }
+            return a_entregar;
+        }
+
+        protected void onPostExecute(Long result) {
+            //System.out.println("Downloaded " + result + " bytes");
+        }
+    }
+
+    private class PedirMapa extends AsyncTask<URL, Integer, Long> {
+        protected Long doInBackground(URL... urls) {
+            Calendar c = Calendar.getInstance();
+            int hora = c.get(Calendar.HOUR_OF_DAY);
+            mapaArray = pedirMapaHTTP(hora);
+            for(int i=0;i<mapaArray.size();i++)
+            {
+                System.out.println("MAPA: "+mapaArray.get(i));
+            }
+            return 0L;
+        }
+
+        private ArrayList<Registro> pedirMapaHTTP(int horaP)
+        {
+            ArrayList<Registro> a_entregar = new ArrayList<Registro>();
+            try {
+                String url = "http://157.253.205.40/api/darEstadoEdificios";
+                URL object = new URL(url);
+
+                HttpURLConnection con = (HttpURLConnection) object.openConnection();
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setRequestProperty("Content-Type", "application/json");
+                con.setRequestProperty("Accept", "application/json");
+                con.setRequestMethod("POST");
+
+                JSONObject objetoJSON = new JSONObject();
+                objetoJSON.put("hora",""+horaP);
+
+                OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
+                wr.write(objetoJSON.toString());
+                wr.flush();
+
+//display what returns the POST request
+
+                StringBuilder sb = new StringBuilder();
+                int HttpResult = con.getResponseCode();
+                //System.out.println("Respuesta:");
+                //System.out.println(HttpResult);
+                //System.out.println("Respuesta esperada:");
+                //System.out.println(HttpURLConnection.HTTP_OK);
+                if (HttpResult == HttpURLConnection.HTTP_CREATED) {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+
+                    br.close();
+                    String res = sb.toString();
+                    //System.out.println("- - - - - - Respuesta del servidor - - - - - -");
+                    //System.out.println("" + res);
+                    //System.out.println("- - - - - - Respuesta del servidor - - - - - -");
+                    JSONArray objetoJSON_recepcion = new JSONArray(res);
+                    for (int i=0;i<objetoJSON_recepcion.length();i++)
+                    {
+                        JSONObject o = objetoJSON_recepcion.getJSONObject(i);
+                        Registro r = new Registro(horaP,"",o.getInt("lugar"),o.getInt("ruido"),o.getInt("luz"),o.getInt("temperatura"),o.getInt("humedad"));
+                        a_entregar.add(r);
+                    }
+                    System.out.println("- - - - - - Sugerencia del servidor - - - - - -");
+                    System.out.println(objetoJSON_recepcion);
+
+                } else {
+                    //System.out.println(con.getResponseMessage());
+                }
+            }
+            catch(Exception e)
+            {
+                System.out.println("Problemas de red");
             }
             return a_entregar;
         }
