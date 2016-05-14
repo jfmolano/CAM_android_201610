@@ -987,12 +987,118 @@ public class MainActivity extends Activity {
                     startActivity(intent);
                 }
                 else{
-                    //textView19
-                    System.out.println("R.id.textView19: "+R.id.txtEdOp1);
-                    TextView textSug1Lugar = (TextView)findViewById(R.id.txtEdOp1);
-                    System.out.println("TextView: "+textSug1Lugar);
-                    System.out.println("textSug1Lugar.getText(): "+textSug1Lugar.getText());
-                    textSug1Lugar.setText(darNombreLugar(act[0].darLugar()));
+                    if(position==0)
+                    {
+                        //Op1
+                        TextView textSug1Lugar = (TextView)findViewById(R.id.txtEdOp1);
+                        textSug1Lugar.setText(darNombreLugar(act[0].darLugar()));
+                        TextView textSug1Ruido = (TextView)findViewById(R.id.txtRuiOp1);
+                        textSug1Ruido.setText("Sonido: "+act[0].darRuido()+"dBA");
+                        TextView textSug1Luz = (TextView)findViewById(R.id.txtLuzOp1);
+                        textSug1Luz.setText("Nivel de luz: "+act[0].darLuz()+"lx");
+                        TextView textSug1Temp = (TextView)findViewById(R.id.txtTemOp1);
+                        textSug1Temp.setText("Temperatura: "+act[0].darTemperatura()+" "+(char) 0x00B0+"C");
+                        TextView textSug1Humedad = (TextView)findViewById(R.id.txtHumOp1);
+                        textSug1Humedad.setText("Humedad: "+act[0].darHumedad()+"%");
+
+                        //Op2
+                        TextView textSug2Lugar = (TextView)findViewById(R.id.txtEdOp2);
+                        textSug2Lugar.setText(darNombreLugar(act[1].darLugar()));
+                        TextView textSug2Ruido = (TextView)findViewById(R.id.txtRuiOp2);
+                        textSug2Ruido.setText("Sonido: "+act[1].darRuido()+"dBA");
+                        TextView textSug2Luz = (TextView)findViewById(R.id.txtLuzOp2);
+                        textSug2Luz.setText("Nivel de luz: "+act[1].darLuz()+"lx");
+                        TextView textSug2Temp = (TextView)findViewById(R.id.txtTemOp2);
+                        textSug2Temp.setText("Temperatura: "+act[1].darTemperatura()+" "+(char) 0x00B0+"C");
+                        TextView textSug2Humedad = (TextView)findViewById(R.id.txtHumOp2);
+                        textSug2Humedad.setText("Humedad: "+act[1].darHumedad()+"%");
+
+                        //Op1
+                        TextView textSug3Lugar = (TextView)findViewById(R.id.txtEdOp3);
+                        textSug3Lugar.setText(darNombreLugar(act[2].darLugar()));
+                        TextView textSug3Ruido = (TextView)findViewById(R.id.txtRuiOp3);
+                        textSug3Ruido.setText("Sonido: "+act[2].darRuido()+"dBA");
+                        TextView textSug3Luz = (TextView)findViewById(R.id.txtLuzOp3);
+                        textSug3Luz.setText("Nivel de luz: "+act[2].darLuz()+"lx");
+                        TextView textSug3Temp = (TextView)findViewById(R.id.txtTemOp3);
+                        textSug3Temp.setText("Temperatura: "+act[2].darTemperatura()+" "+(char) 0x00B0+"C");
+                        TextView textSug3Humedad = (TextView)findViewById(R.id.txtHumOp3);
+                        textSug3Humedad.setText("Humedad: "+act[2].darHumedad()+"%");
+                    }
+                    else if(position==1){
+                        //Op1
+                        TextView textSug1Lugar = (TextView)findViewById(R.id.txtEdOp1);
+                        textSug1Lugar.setText(darNombreLugar(f1[0].darLugar()));
+                        TextView textSug1Ruido = (TextView)findViewById(R.id.txtRuiOp1);
+                        textSug1Ruido.setText("Sonido: "+f1[0].darRuido()+"dBA");
+                        TextView textSug1Luz = (TextView)findViewById(R.id.txtLuzOp1);
+                        textSug1Luz.setText("Nivel de luz: "+f1[0].darLuz()+"lx");
+                        TextView textSug1Temp = (TextView)findViewById(R.id.txtTemOp1);
+                        textSug1Temp.setText("Temperatura: "+f1[0].darTemperatura()+" "+(char) 0x00B0+"C");
+                        TextView textSug1Humedad = (TextView)findViewById(R.id.txtHumOp1);
+                        textSug1Humedad.setText("Humedad: "+f1[0].darHumedad()+"%");
+
+                        //Op2
+                        TextView textSug2Lugar = (TextView)findViewById(R.id.txtEdOp2);
+                        textSug2Lugar.setText(darNombreLugar(f1[1].darLugar()));
+                        TextView textSug2Ruido = (TextView)findViewById(R.id.txtRuiOp2);
+                        textSug2Ruido.setText("Sonido: "+f1[1].darRuido()+"dBA");
+                        TextView textSug2Luz = (TextView)findViewById(R.id.txtLuzOp2);
+                        textSug2Luz.setText("Nivel de luz: "+f1[1].darLuz()+"lx");
+                        TextView textSug2Temp = (TextView)findViewById(R.id.txtTemOp2);
+                        textSug2Temp.setText("Temperatura: "+f1[1].darTemperatura()+" "+(char) 0x00B0+"C");
+                        TextView textSug2Humedad = (TextView)findViewById(R.id.txtHumOp2);
+                        textSug2Humedad.setText("Humedad: "+f1[1].darHumedad()+"%");
+
+                        //Op1
+                        TextView textSug3Lugar = (TextView)findViewById(R.id.txtEdOp3);
+                        textSug3Lugar.setText(darNombreLugar(f1[2].darLugar()));
+                        TextView textSug3Ruido = (TextView)findViewById(R.id.txtRuiOp3);
+                        textSug3Ruido.setText("Sonido: "+f1[2].darRuido()+"dBA");
+                        TextView textSug3Luz = (TextView)findViewById(R.id.txtLuzOp3);
+                        textSug3Luz.setText("Nivel de luz: "+f1[2].darLuz()+"lx");
+                        TextView textSug3Temp = (TextView)findViewById(R.id.txtTemOp3);
+                        textSug3Temp.setText("Temperatura: "+f1[2].darTemperatura()+" "+(char) 0x00B0+"C");
+                        TextView textSug3Humedad = (TextView)findViewById(R.id.txtHumOp3);
+                        textSug3Humedad.setText("Humedad: "+f1[2].darHumedad()+"%");
+                    }
+                    else{
+                        //Op1
+                        TextView textSug1Lugar = (TextView)findViewById(R.id.txtEdOp1);
+                        textSug1Lugar.setText(darNombreLugar(f2[0].darLugar()));
+                        TextView textSug1Ruido = (TextView)findViewById(R.id.txtRuiOp1);
+                        textSug1Ruido.setText("Sonido: "+f2[0].darRuido()+"dBA");
+                        TextView textSug1Luz = (TextView)findViewById(R.id.txtLuzOp1);
+                        textSug1Luz.setText("Nivel de luz: "+f2[0].darLuz()+"lx");
+                        TextView textSug1Temp = (TextView)findViewById(R.id.txtTemOp1);
+                        textSug1Temp.setText("Temperatura: "+f2[0].darTemperatura()+" "+(char) 0x00B0+"C");
+                        TextView textSug1Humedad = (TextView)findViewById(R.id.txtHumOp1);
+                        textSug1Humedad.setText("Humedad: "+f2[0].darHumedad()+"%");
+
+                        //Op2
+                        TextView textSug2Lugar = (TextView)findViewById(R.id.txtEdOp2);
+                        textSug2Lugar.setText(darNombreLugar(f2[1].darLugar()));
+                        TextView textSug2Ruido = (TextView)findViewById(R.id.txtRuiOp2);
+                        textSug2Ruido.setText("Sonido: "+f2[1].darRuido()+"dBA");
+                        TextView textSug2Luz = (TextView)findViewById(R.id.txtLuzOp2);
+                        textSug2Luz.setText("Nivel de luz: "+f2[1].darLuz()+"lx");
+                        TextView textSug2Temp = (TextView)findViewById(R.id.txtTemOp2);
+                        textSug2Temp.setText("Temperatura: "+f2[1].darTemperatura()+" "+(char) 0x00B0+"C");
+                        TextView textSug2Humedad = (TextView)findViewById(R.id.txtHumOp2);
+                        textSug2Humedad.setText("Humedad: "+f2[1].darHumedad()+"%");
+
+                        //Op1
+                        TextView textSug3Lugar = (TextView)findViewById(R.id.txtEdOp3);
+                        textSug3Lugar.setText(darNombreLugar(f2[2].darLugar()));
+                        TextView textSug3Ruido = (TextView)findViewById(R.id.txtRuiOp3);
+                        textSug3Ruido.setText("Sonido: "+f2[2].darRuido()+"dBA");
+                        TextView textSug3Luz = (TextView)findViewById(R.id.txtLuzOp3);
+                        textSug3Luz.setText("Nivel de luz: "+f2[2].darLuz()+"lx");
+                        TextView textSug3Temp = (TextView)findViewById(R.id.txtTemOp3);
+                        textSug3Temp.setText("Temperatura: "+f2[2].darTemperatura()+" "+(char) 0x00B0+"C");
+                        TextView textSug3Humedad = (TextView)findViewById(R.id.txtHumOp3);
+                        textSug3Humedad.setText("Humedad: "+f2[2].darHumedad()+"%");
+                    }
                 }
             }
         });}
