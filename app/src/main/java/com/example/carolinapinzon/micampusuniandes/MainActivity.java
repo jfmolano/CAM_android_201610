@@ -114,6 +114,7 @@ public class MainActivity extends Activity {
     private double longitud;
     private SQLiteDatabase mydatabase;
     private boolean listaInterfaz;
+    private boolean listoMapa;
     private int[] preferenciaAct;
     private int[] preferencia1hora;
     private int[] preferencia2hora;
@@ -341,12 +342,112 @@ public class MainActivity extends Activity {
         System.out.println("Preferencia + + + + + + + + + + Ruido: "+preferencia1hora[0]+" Luz: "+preferencia1hora[1]+" Temperatura: "+preferencia1hora[2]+" Humedad: "+preferencia1hora[3]);
         System.out.println("Preferencia + + + + + + + + + + Ruido: "+preferencia2hora[0]+" Luz: "+preferencia2hora[1]+" Temperatura: "+preferencia2hora[2]+" Humedad: "+preferencia2hora[3]);
         listaInterfaz = false;
+        listoMapa = false;
         new Solicitar().execute();
         while(!listaInterfaz){}
-        populateSuferenciasDia(act,f1,f2);
+        populateSuferenciasDia(act, f1, f2);
         populateListView();
         registerClickCallback();
         new PedirMapa().execute();
+        while(!listoMapa){}
+        if(mapaArray.size()>0){
+        Registro primero = mapaArray.get(0);
+        Registro ultimo = mapaArray.get(mapaArray.size() - 1);
+        int l_ml = primero.darLuz();
+        int r_ml = primero.darRuido();
+        int h_ml = primero.darHumedad();
+        int t_ml = primero.darTemperatura();
+        int l_sd = ultimo.darLuz();
+        int r_sd = ultimo.darRuido();
+        int h_sd = ultimo.darHumedad();
+        int t_sd = ultimo.darTemperatura();
+        ImageView imgHumML = (ImageView) findViewById(R.id.imgHumML);
+        ImageView imgLuzML = (ImageView) findViewById(R.id.imgLuzML);
+        ImageView imgTempML = (ImageView) findViewById(R.id.imgTempML);
+        ImageView imgRuiML = (ImageView) findViewById(R.id.imgRuiML);
+        ImageView imgHumSD = (ImageView) findViewById(R.id.imgHumSD);
+        ImageView imgLuzSD = (ImageView) findViewById(R.id.imgLuzSD);
+        ImageView imgTempSD = (ImageView) findViewById(R.id.imgTempSD);
+        ImageView imgRuiSD = (ImageView) findViewById(R.id.imgRuiSD);
+        if(l_ml<=1){
+            imgLuzML.setImageResource(R.drawable.l_baja);
+        }
+        else if(l_ml>1 && l_ml<=5){
+            imgLuzML.setImageResource(R.drawable.l_media);
+        }
+        else{
+            imgLuzML.setImageResource(R.drawable.l_alta);
+        }
+
+        if(h_ml<=40){
+            imgHumML.setImageResource(R.drawable.h_bajo);
+        }
+        else if(h_ml>40 && h_ml<=50){
+            imgHumML.setImageResource(R.drawable.h_media);
+        }
+        else{
+            imgHumML.setImageResource(R.drawable.h_alta);
+        }
+
+        if(t_ml<=20){
+            imgTempML.setImageResource(R.drawable.t_baja);
+        }
+        else if(t_ml>20 && t_ml<=23){
+            imgTempML.setImageResource(R.drawable.t_media);
+        }
+        else{
+            imgTempML.setImageResource(R.drawable.t_alta);
+        }
+
+        if(r_ml<=50){
+            imgRuiML.setImageResource(R.drawable.s_bajo);
+        }
+        else if(r_ml>50 && r_ml<=60){
+            imgRuiML.setImageResource(R.drawable.s_medio);
+        }
+        else{
+            imgRuiML.setImageResource(R.drawable.s_alto);
+        }
+
+        if(l_sd<=1){
+            imgLuzSD.setImageResource(R.drawable.l_baja);
+        }
+        else if(l_sd>1 && l_sd<=5){
+            imgLuzSD.setImageResource(R.drawable.l_media);
+        }
+        else{
+            imgLuzSD.setImageResource(R.drawable.l_alta);
+        }
+
+        if(h_sd<=40){
+            imgHumSD.setImageResource(R.drawable.h_bajo);
+        }
+        else if(h_sd>40 && h_sd<=50){
+            imgHumSD.setImageResource(R.drawable.h_media);
+        }
+        else{
+            imgHumSD.setImageResource(R.drawable.h_alta);
+        }
+
+        if(t_sd<=20){
+            imgTempSD.setImageResource(R.drawable.t_baja);
+        }
+        else if(t_sd>20 && t_sd<=23){
+            imgTempSD.setImageResource(R.drawable.t_media);
+        }
+        else{
+            imgTempSD.setImageResource(R.drawable.t_alta);
+        }
+
+        if(r_sd<=50){
+            imgRuiSD.setImageResource(R.drawable.s_bajo);
+        }
+        else if(r_sd>50 && r_sd<=60){
+            imgRuiSD.setImageResource(R.drawable.s_medio);
+        }
+        else{
+            imgRuiSD.setImageResource(R.drawable.s_alto);
+        }}
     }
 
     @Override
@@ -582,6 +683,7 @@ public class MainActivity extends Activity {
             {
                 System.out.println("MAPA: "+mapaArray.get(i));
             }
+            listoMapa = true;
             return 0L;
         }
 
@@ -995,7 +1097,7 @@ public class MainActivity extends Activity {
                         TextView textSug1Ruido = (TextView)findViewById(R.id.txtRuiOp1);
                         textSug1Ruido.setText("Sonido: "+act[0].darRuido()+"dBA");
                         TextView textSug1Luz = (TextView)findViewById(R.id.txtLuzOp1);
-                        textSug1Luz.setText("Nivel de luz: "+act[0].darLuz()+"lx");
+                        textSug1Luz.setText("Nivel de luz: "+(act[0].darLuz()*600)+"lx");
                         TextView textSug1Temp = (TextView)findViewById(R.id.txtTemOp1);
                         textSug1Temp.setText("Temperatura: "+act[0].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug1Humedad = (TextView)findViewById(R.id.txtHumOp1);
@@ -1009,7 +1111,7 @@ public class MainActivity extends Activity {
                         TextView textSug2Ruido = (TextView)findViewById(R.id.txtRuiOp2);
                         textSug2Ruido.setText("Sonido: "+act[1].darRuido()+"dBA");
                         TextView textSug2Luz = (TextView)findViewById(R.id.txtLuzOp2);
-                        textSug2Luz.setText("Nivel de luz: "+act[1].darLuz()+"lx");
+                        textSug2Luz.setText("Nivel de luz: "+(act[1].darLuz()*600)+"lx");
                         TextView textSug2Temp = (TextView)findViewById(R.id.txtTemOp2);
                         textSug2Temp.setText("Temperatura: "+act[1].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug2Humedad = (TextView)findViewById(R.id.txtHumOp2);
@@ -1023,7 +1125,7 @@ public class MainActivity extends Activity {
                         TextView textSug3Ruido = (TextView)findViewById(R.id.txtRuiOp3);
                         textSug3Ruido.setText("Sonido: "+act[2].darRuido()+"dBA");
                         TextView textSug3Luz = (TextView)findViewById(R.id.txtLuzOp3);
-                        textSug3Luz.setText("Nivel de luz: "+act[2].darLuz()+"lx");
+                        textSug3Luz.setText("Nivel de luz: "+(act[2].darLuz()*600)+"lx");
                         TextView textSug3Temp = (TextView)findViewById(R.id.txtTemOp3);
                         textSug3Temp.setText("Temperatura: "+act[2].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug3Humedad = (TextView)findViewById(R.id.txtHumOp3);
@@ -1038,7 +1140,7 @@ public class MainActivity extends Activity {
                         TextView textSug1Ruido = (TextView)findViewById(R.id.txtRuiOp1);
                         textSug1Ruido.setText("Sonido: "+f1[0].darRuido()+"dBA");
                         TextView textSug1Luz = (TextView)findViewById(R.id.txtLuzOp1);
-                        textSug1Luz.setText("Nivel de luz: "+f1[0].darLuz()+"lx");
+                        textSug1Luz.setText("Nivel de luz: "+(f1[0].darLuz()*600)+"lx");
                         TextView textSug1Temp = (TextView)findViewById(R.id.txtTemOp1);
                         textSug1Temp.setText("Temperatura: "+f1[0].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug1Humedad = (TextView)findViewById(R.id.txtHumOp1);
@@ -1052,7 +1154,7 @@ public class MainActivity extends Activity {
                         TextView textSug2Ruido = (TextView)findViewById(R.id.txtRuiOp2);
                         textSug2Ruido.setText("Sonido: "+f1[1].darRuido()+"dBA");
                         TextView textSug2Luz = (TextView)findViewById(R.id.txtLuzOp2);
-                        textSug2Luz.setText("Nivel de luz: "+f1[1].darLuz()+"lx");
+                        textSug2Luz.setText("Nivel de luz: "+(f1[1].darLuz()*600)+"lx");
                         TextView textSug2Temp = (TextView)findViewById(R.id.txtTemOp2);
                         textSug2Temp.setText("Temperatura: "+f1[1].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug2Humedad = (TextView)findViewById(R.id.txtHumOp2);
@@ -1066,7 +1168,7 @@ public class MainActivity extends Activity {
                         TextView textSug3Ruido = (TextView)findViewById(R.id.txtRuiOp3);
                         textSug3Ruido.setText("Sonido: "+f1[2].darRuido()+"dBA");
                         TextView textSug3Luz = (TextView)findViewById(R.id.txtLuzOp3);
-                        textSug3Luz.setText("Nivel de luz: "+f1[2].darLuz()+"lx");
+                        textSug3Luz.setText("Nivel de luz: "+(f1[2].darLuz()*600)+"lx");
                         TextView textSug3Temp = (TextView)findViewById(R.id.txtTemOp3);
                         textSug3Temp.setText("Temperatura: "+f1[2].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug3Humedad = (TextView)findViewById(R.id.txtHumOp3);
@@ -1081,7 +1183,7 @@ public class MainActivity extends Activity {
                         TextView textSug1Ruido = (TextView)findViewById(R.id.txtRuiOp1);
                         textSug1Ruido.setText("Sonido: "+f2[0].darRuido()+"dBA");
                         TextView textSug1Luz = (TextView)findViewById(R.id.txtLuzOp1);
-                        textSug1Luz.setText("Nivel de luz: "+f2[0].darLuz()+"lx");
+                        textSug1Luz.setText("Nivel de luz: "+(f2[0].darLuz()*600)+"lx");
                         TextView textSug1Temp = (TextView)findViewById(R.id.txtTemOp1);
                         textSug1Temp.setText("Temperatura: "+f2[0].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug1Humedad = (TextView)findViewById(R.id.txtHumOp1);
@@ -1095,7 +1197,7 @@ public class MainActivity extends Activity {
                         TextView textSug2Ruido = (TextView)findViewById(R.id.txtRuiOp2);
                         textSug2Ruido.setText("Sonido: "+f2[1].darRuido()+"dBA");
                         TextView textSug2Luz = (TextView)findViewById(R.id.txtLuzOp2);
-                        textSug2Luz.setText("Nivel de luz: "+f2[1].darLuz()+"lx");
+                        textSug2Luz.setText("Nivel de luz: "+(f2[1].darLuz()*600)+"lx");
                         TextView textSug2Temp = (TextView)findViewById(R.id.txtTemOp2);
                         textSug2Temp.setText("Temperatura: "+f2[1].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug2Humedad = (TextView)findViewById(R.id.txtHumOp2);
@@ -1109,7 +1211,7 @@ public class MainActivity extends Activity {
                         TextView textSug3Ruido = (TextView)findViewById(R.id.txtRuiOp3);
                         textSug3Ruido.setText("Sonido: "+f2[2].darRuido()+"dBA");
                         TextView textSug3Luz = (TextView)findViewById(R.id.txtLuzOp3);
-                        textSug3Luz.setText("Nivel de luz: "+f2[2].darLuz()+"lx");
+                        textSug3Luz.setText("Nivel de luz: "+(f2[2].darLuz()*600)+"lx");
                         TextView textSug3Temp = (TextView)findViewById(R.id.txtTemOp3);
                         textSug3Temp.setText("Temperatura: "+f2[2].darTemperatura()+" "+(char) 0x00B0+"C");
                         TextView textSug3Humedad = (TextView)findViewById(R.id.txtHumOp3);
@@ -1170,7 +1272,7 @@ public class MainActivity extends Activity {
             textSonido.setText("Ruido: " + ruido + "dBA - " + nivel);
             //
             TextView textLuz = (TextView) itemView.findViewById(R.id.txtLuz);
-            textLuz.setText("Nivel de luz: " + sugerenciaActual.getLuz() + " lx");
+            textLuz.setText("Nivel de luz: " + (sugerenciaActual.getLuz()*600) + " lx");
             TextView textTemp = (TextView) itemView.findViewById(R.id.txtTemperatura);
             textTemp.setText("Temperatura: " + sugerenciaActual.getTemperatura() + " " + (char) 0x00B0 + "C");
             TextView textHum = (TextView) itemView.findViewById(R.id.txtHumedad);
@@ -1293,8 +1395,13 @@ public class MainActivity extends Activity {
                                             String temperaturaStr = data.substring(31, 33);
                                             System.out.println("BT: DATA H: "+humedadStr);
                                             System.out.println("BT: DATA T: "+temperaturaStr);
+                                            try{
                                             humedad = Integer.parseInt(humedadStr);
-                                            temperatura = Integer.parseInt(temperaturaStr);
+                                            temperatura = Integer.parseInt(temperaturaStr);}
+                                            catch (Exception e)
+                                            {
+                                                System.out.println("Fallo el BT");
+                                            }
                                         }
                                     });
                                 }
